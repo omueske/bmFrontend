@@ -1,9 +1,18 @@
 <template>
   <div id="app">
+    <nav-bar />
     <nuxt />
   </div>
 </template>
-    <style>
+<script>
+import NavBar from '~/components/molecules/NavBar.vue'
+export default {
+  components: {
+    NavBar
+  }
+}
+</script>
+<style>
 html {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;

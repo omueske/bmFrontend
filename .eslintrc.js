@@ -11,6 +11,14 @@ module.exports = {
   plugins: [],
   // add your custom rules here
   rules: {
-    'eol-last': [2, 'windows']
+    'eol-last': [2, 'windows'],
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always',
+        named: 'never',
+        asyncArrow: 'always'
+      }
+    ]
   }
 }

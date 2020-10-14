@@ -1,13 +1,28 @@
 <template>
   <div class="nav">
-    <nuxt-link to="/" class="brand">Real World Events</nuxt-link>
+    <nuxt-link to="/" class="brand">Bee Manager</nuxt-link>
     <nav>
-      <nuxt-link to="/">List</nuxt-link>&nbsp;|
-      <nuxt-link to="/create">Create</nuxt-link>
+      <LinkList :links="links" />
     </nav>
   </div>
 </template>
-    <style scoped>
+<script>
+import LinkList from '~/components/molecules/LinkList.vue'
+export default {
+  components: {
+    LinkList
+  },
+  data() {
+    return {
+      links: [
+        { page: '/', name: 'Home' },
+        { page: '/location', name: 'Standort' }
+      ]
+    }
+  }
+}
+</script>
+<style scoped>
 .brand {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
