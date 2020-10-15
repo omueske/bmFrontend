@@ -35,5 +35,15 @@ export const actions = {
         console.log(res.status)
       }
     })
+  },
+  async addLocation({ commit }, payload) {
+    console.log('Add Loc Store')
+    await this.$axios.post('/api/locations', payload).then((res) => {
+      if (res.status === 200) {
+        commit('ADD_LOCATION', payload)
+      } else {
+        console.log(res.status)
+      }
+    })
   }
 }
