@@ -5,8 +5,10 @@
         <b-col sm="9">
           <h4>{{ location.name }}</h4>
           <b-row>
-            <b-col cols="8" sm="6">Hive 1</b-col>
-            <b-col cols="4" sm="6">Hive 2</b-col>
+            <b-col cols="8" sm="6">{{ location.address }}</b-col>
+            <b-col cols="4" sm="6">{{ location.comment }}</b-col>
+            <b-col cols="4" sm="6">{{ location.latitude }}</b-col>
+            <b-col cols="4" sm="6">{{ location.longitude }}</b-col>
           </b-row>
         </b-col>
       </b-row>
@@ -15,9 +17,11 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      location: { name: 'Jesingen' }
+  props: {
+    location: {
+      type: Object,
+      required: true,
+      default: null
     }
   }
 }
