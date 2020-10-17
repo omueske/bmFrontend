@@ -30,7 +30,7 @@ export const actions = {
     console.log('IM STORE BH')
     await this.$axios.get('/api/beeHives').then((res) => {
       if (res.status === 200) {
-        commit('SET_LOCATION_LIST', res.data)
+        commit('SET_BEEHIVE_LIST', res.data)
       } else {
         console.log(res.status)
       }
