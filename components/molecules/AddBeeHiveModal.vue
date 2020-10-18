@@ -68,8 +68,16 @@ export default {
   },
   methods: {
     ...mapActions('beeHives', ['addBeeHive']),
+    ...mapActions('locations', ['loadLocations']),
     async handleOk() {
-      await console.log(await this.addBeeHive(this.beeHive))
+      await console.log(
+        await this.addBeeHive({
+          beeHive: this.beeHive,
+          locationID: this.id
+        }).then(() => {
+          this.loadLocations()
+        })
+      )
     },
     resetModal() {
       this.beeHive = {}

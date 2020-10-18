@@ -38,11 +38,19 @@ export const actions = {
   },
   async addBeeHive({ commit }, payload) {
     console.log('Add BeeHive Store')
-    await this.$axios.post('/api/beeHives', payload).then((res) => {
-      if (res.status === 201) {
+    await this.$axios.post('/api/beeHives', payload.beeHive).then((res) => {
+      console.log(res)
+      if (res.status == 201) {
+        console.log('im if')
         commit('ADD_BEEHIVE', payload)
-        console.log(res)
-        return res.data
+
+        this.$axios
+          .put(`/api/locations/${payload.locationID}/link/${res.data._id}`)
+          .then((res) => {
+            if (res.status !== 201) {
+              console.log(res.status)
+            }
+          })
       } else {
         console.log(res.status)
       }

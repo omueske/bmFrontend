@@ -36,7 +36,8 @@ export default {
 </script>
 <style scoped>
 .box {
-  background-color: #39b982;
-  border-bottom: solid 2px #39b982;
+  background-color: #fff184;
+  border-bottom: solid 2px #000000;
+  margin: 25px;
 }
 </style>
