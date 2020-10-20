@@ -55,5 +55,13 @@ export const actions = {
         console.log(res.status)
       }
     })
+  },
+  async getHiveByID(beeHiveID) {
+    console.log('---> ' + beeHiveID)
+    this.$axios.get(`/api/beeHives/${beeHiveID}`).then((res) => {
+      if (res.status !== 200) {
+        console.log(res.status)
+      }
+    })
   }
 }

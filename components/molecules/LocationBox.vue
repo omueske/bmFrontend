@@ -4,7 +4,7 @@
       <b-row class="box">
         <b-col sm="9">
           <h4>{{ location.name }}</h4>
-          {{ location }}
+          <!-- {{ location }} -->
           <b-row>
             <b-col cols="4" sm="6"><AddBeeHiveModal :id="location._id"/></b-col>
           </b-row>
@@ -14,6 +14,11 @@
             <b-col cols="4" sm="6">{{ location.latitude }}</b-col>
             <b-col cols="4" sm="6">{{ location.longitude }}</b-col>
           </b-row>
+          <b-row>
+            <b-col cols="8" sm="6"
+              ><BeeHiveBox :locationID="location._id"
+            /></b-col>
+          </b-row>
         </b-col>
       </b-row>
     </b-container>
@@ -21,9 +26,11 @@
 </template>
 <script>
 import AddBeeHiveModal from '~/components/molecules/AddBeeHiveModal.vue'
+import BeeHiveBox from '~/components/molecules/BeeHiveBox.vue'
 export default {
   components: {
-    AddBeeHiveModal
+    AddBeeHiveModal,
+    BeeHiveBox
   },
   props: {
     location: {

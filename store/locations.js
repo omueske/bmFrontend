@@ -45,5 +45,22 @@ export const actions = {
         console.log(res.status)
       }
     })
+  },
+  async getAllHivesFromLocation(locationID) {
+    let beeHiveList = []
+    console.log('Given: ' + locationID)
+    console.table(locationID)
+    for (location in state.locationList) {
+      console.log('locID: ' + location.id + ' lID: ' + locationID)
+      if (location._id == locationID) {
+        for (hive in location.hives) {
+          const hive = await this.$axios.get(`/api/beeHives/${hive.beeHiveID}`)
+          console.table(hive)
+          beeHiveList.push(hive)
+        }
+      }
+    }
+    console.log(beeHiveList)
+    return beeHiveList
   }
 }
