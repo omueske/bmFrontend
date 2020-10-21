@@ -6,9 +6,6 @@
     >
     <LocationTable />
     <AddLocationModal id="add-location-modal" />
-    <div v-for="location in locationList" :key="location.id">
-      <LocationBox :location="location" />
-    </div>
   </div>
 </template>
 

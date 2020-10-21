@@ -1,16 +1,21 @@
 <template>
   <div>
-    <h1>Standort</h1>
-    <b-button pill variant="outline-secondary" v-b-modal.add-location-modal
-      >Neuer Standort</b-button
-    >
-    <LocationTable />
-    <AddLocationModal id="add-location-modal" />
-    <div v-for="location in locationList" :key="location.id">
-      <LocationBox :location="location" />
-    </div>
+    <h1>Standort {{ selectedLocation.name }}</h1>
+    Anzahl Völker: {{ selectedLocation.hives.length }}
+
+    <BeeHiveTable />
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+import BeeHiveTable from '~/components/molecules/BeeHiveTable.vue'
+export default {
+  computed: {
+    ...mapState({
+      locationList: (state) => state.locations.locationList,
+      selectedLocation: (state) => state.locations.selectedLocation
+    })
+  }
+}
 </script>

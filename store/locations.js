@@ -2,7 +2,7 @@ import vuex from 'vuex'
 import axios from 'axios'
 
 export const state = () => ({
-  currentLocation: String,
+  selectedLocation: String,
   locationList: []
 })
 
@@ -11,8 +11,11 @@ export const mutations = {
     state.locationList = locations
   },
 
-  SET_CURRENT_LOCATION(state, location) {
-    state.currentLocation = location.locid
+  SET_SELECTED_LOCATION(state, locationId) {
+    const loc = state.locationList.find(
+      (location) => location._id === locationId
+    )
+    state.selectedLocation = loc
   },
 
   ADD_LOCATION(state, loc) {
@@ -56,5 +59,8 @@ export const actions = {
     } else {
       return null
     }
+  },
+  async setSelectedLocation({ commit }, locationId) {
+    commit('SET_SELECTED_LOCATION', locationId)
   }
 }

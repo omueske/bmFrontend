@@ -27,9 +27,7 @@ export default {
     }),
     ...mapGetters('beeHives', ['getBeeHiveIdByHiveId']),
     beeHive() {
-      console.log('YUPP')
       let hive = this.getBeeHiveIdByHiveId(this.beeHiveId)
-      console.log(hive)
       return hive
     }
   }

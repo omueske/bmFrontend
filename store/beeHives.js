@@ -8,7 +8,6 @@ export const state = () => ({
 
 export const mutations = {
   SET_BEEHIVE_LIST(state, beeHives) {
-    console.log(beeHives)
     state.beeHiveList = beeHives
   },
 
@@ -36,8 +35,6 @@ export const actions = {
     })
   },
   async addBeeHive({ commit }, payload) {
-    console.log('Add BeeHive Store')
-
     // Add LocationID to Beehive
     payload.beeHive.locationId = payload.locationID
     await this.$axios.post('/api/beeHives', payload.beeHive).then((res) => {
