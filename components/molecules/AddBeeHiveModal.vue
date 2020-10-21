@@ -5,7 +5,7 @@
       :id="'add-BeeHive-modal-' + id"
       hide-backdrop
       content-class="shadow"
-      title="Neuen Standort anlegen"
+      title="Neues Volk anlegen"
       @show="resetModal"
       @ok="handleOk"
     >
@@ -15,6 +15,11 @@
         name="Name"
         class="input-field"
       />
+      <!-- <LocationSelect
+        v-model="beeHive.locationId"
+        name="locationId"
+        class="input-field"
+      /> -->
       <BeeHiveInputField
         v-model="beeHive.number"
         placeholder="Bitte Nummer eingeben"
@@ -48,11 +53,13 @@ import { mapActions, mapState } from 'vuex'
 import BeeHiveInputField from '~/components/atoms/beeHive/BeeHiveInputField.vue'
 import BeeHiveStatusSelect from '~/components/atoms/beeHive/BeeHiveStatusSelect.vue'
 import BeeHiveAddHiveButton from '~/components/atoms/beeHive/BeeHiveAddHiveButton.vue'
+import LocationSelect from '~/components/atoms/location/LocationSelect.vue'
 export default {
   components: {
     BeeHiveAddHiveButton,
     BeeHiveInputField,
-    BeeHiveStatusSelect
+    BeeHiveStatusSelect,
+    LocationSelect
   },
   props: {
     id: {
@@ -68,6 +75,7 @@ export default {
   },
   methods: {
     ...mapActions('beeHives', ['addBeeHive']),
+    ...mapActions('beeHives', ['loadBeeHives']),
     ...mapActions('locations', ['loadLocations']),
     async handleOk() {
       await console.log(
@@ -75,7 +83,9 @@ export default {
           beeHive: this.beeHive,
           locationID: this.id
         }).then(() => {
+          // now the Lists must be refreshed
           this.loadLocations()
+          this.loadBeeHives()
         })
       )
     },

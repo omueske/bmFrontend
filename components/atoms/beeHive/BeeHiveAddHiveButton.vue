@@ -5,7 +5,7 @@
       v-b-modal="'add-BeeHive-modal-' + id"
       class="mb-2"
     >
-      <b-icon icon="power" aria-hidden="true"></b-icon> Volk
+      <b-icon icon="plus-circle" aria-hidden="true"></b-icon> Volk
     </b-button>
   </div>
 </template>

@@ -6,7 +6,9 @@
           <h4>{{ location.name }}</h4>
           <!-- {{ location }} -->
           <b-row>
-            <b-col cols="4" sm="6"><AddBeeHiveModal :id="location._id"/></b-col>
+            <b-col cols="4" sm="6"
+              ><AddBeeHiveModal :id="location._id"
+            /></b-col>
           </b-row>
           <b-row>
             <b-col cols="8" sm="6">{{ location.address }}</b-col>
@@ -15,8 +17,12 @@
             <b-col cols="4" sm="6">{{ location.longitude }}</b-col>
           </b-row>
           <b-row>
-            <b-col cols="8" sm="6"
-              ><BeeHiveBox :locationID="location._id"
+            <b-col
+              v-for="hive in location.hives"
+              :key="hive._id"
+              cols="8"
+              sm="6"
+              ><BeeHiveBox :beeHiveId="hive.beeHiveID" class="location-box"
             /></b-col>
           </b-row>
         </b-col>
@@ -25,6 +31,7 @@
   </div>
 </template>
 <script>
+import { mapState, mapGetters } from 'vuex'
 import AddBeeHiveModal from '~/components/molecules/AddBeeHiveModal.vue'
 import BeeHiveBox from '~/components/molecules/BeeHiveBox.vue'
 export default {
@@ -38,6 +45,11 @@ export default {
       required: true,
       default: null
     }
+  },
+  computed: {
+    ...mapState({
+      beeHiveList: (state) => state.beeHives.beeHiveList
+    })
   }
 }
 </script>
@@ -46,5 +58,8 @@ export default {
   background-color: #fff184;
   border-bottom: solid 2px #000000;
   margin: 25px;
+}
+.location-box {
+  margin-bottom: 20px;
 }
 </style>

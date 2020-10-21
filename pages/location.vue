@@ -19,22 +19,21 @@ export default {
   components: {
     LocationBox
   },
-  async asyncData({ data, store }) {
-    store.dispatch('locations/loadLocations').catch((e) => {
-      console.log(e)
-    })
-  },
+
   computed: {
     ...mapState({
       locationList: (state) => state.locations.locationList,
-      currentLocation: (state) => state.locations.currentLocation
+      currentLocation: (state) => state.locations.currentLocation,
+      beeHiveList: (state) => state.beeHives.beeHiveList
     })
   },
   methods: {
-    ...mapActions('locations', ['loadLocations'])
+    ...mapActions('locations', ['loadLocations']),
+    ...mapActions('beeHives', ['loadBeeHives'])
   },
-  create() {
+  created: function () {
     this.loadLocations()
+    this.loadBeeHives()
   }
 }
 </script>

@@ -1,18 +1,20 @@
 <template>
   <div>
-    <div v-for="hive in hiveList" :key="hive._id">
-      <p id="hive-box">{{ hive }}</p>
+    <div id="hive-box">
+      <p>
+        {{ beeHive.number }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {},
   props: {
-    locationID: {
+    beeHiveId: {
       type: String,
       required: true,
       default: null
@@ -20,28 +22,23 @@ export default {
   },
   computed: {
     ...mapState({
-      locationList: (state) => state.locations.locationList
+      locationList: (state) => state.locations.locationList,
+      beeHiveList: (state) => state.beeHives.beeHiveList
     }),
-    async hiveList() {
-      let h = []
-      for (const loc of this.locationList) {
-        if (loc._id == this.locationID) {
-          //   console.table(loc)
-          for (const hive of loc.hives) {
-            console.table(hive)
-            console.log(hive.beeHiveID)
-            const hObj = await this.getHiveByID(hive.beeHiveID)
-            console.log('--> ' + hObj)
-            // h.push(this.getHiveByID(hive.beeHiveID))
-          }
-        }
-      }
-      return h
+    ...mapGetters('beeHives', ['getBeeHiveIdByHiveId']),
+    beeHive() {
+      console.log('YUPP')
+      let hive = this.getBeeHiveIdByHiveId(this.beeHiveId)
+      console.log(hive)
+      return hive
     }
-  },
-  methods: {
-    ...mapActions('beeHives', ['getHiveByID'])
   }
 }
 </script>
-.hive-box { padding-bottom: 5px; border-bottom: 1px solid;}
+<style scoped>
+.hive-box {
+  padding-bottom: 20px;
+  border: 1px solid;
+}
+</style>
+
