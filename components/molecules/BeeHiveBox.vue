@@ -38,7 +38,7 @@ export default {
 <style scoped>
 .hive-box {
   padding-bottom: 20px;
-  border: 1px solid;
+  border: 1px solid black;
 }
 </style>
 

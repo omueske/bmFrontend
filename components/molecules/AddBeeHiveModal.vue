@@ -77,17 +77,16 @@ export default {
     ...mapActions('beeHives', ['addBeeHive']),
     ...mapActions('beeHives', ['loadBeeHives']),
     ...mapActions('locations', ['loadLocations']),
+
     async handleOk() {
-      await console.log(
-        await this.addBeeHive({
-          beeHive: this.beeHive,
-          locationID: this.id
-        }).then(() => {
-          // now the Lists must be refreshed
-          this.loadLocations()
-          this.loadBeeHives()
-        })
-      )
+      await this.addBeeHive({
+        beeHive: this.beeHive,
+        locationID: this.id
+      }).then(() => {
+        // now the Lists must be refreshed
+        this.loadLocations()
+        this.loadBeeHives()
+      })
     },
     resetModal() {
       this.beeHive = {}
@@ -95,4 +94,9 @@ export default {
   }
 }
 </script>
-.input-field { padding-bottom: 5px; }
+<style scoped>
+.input-field {
+  padding-bottom: 5px;
+}
+</style>
+

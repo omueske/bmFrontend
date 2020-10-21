@@ -17,6 +17,13 @@ export const mutations = {
 
   ADD_LOCATION(state, loc) {
     state.locationList.push(loc)
+  },
+
+  ADD_BEEHIVE_TO_LOCATION(state, payload) {
+    locationIndex = state.locationList.findIndex(
+      (loc) => loc._id === payload.locationId
+    )
+    state.locationlist[index].push(payload.beeHiveId)
   }
 
   // DELETE_LOCATION(state, location) {
@@ -36,11 +43,18 @@ export const actions = {
   },
   async addLocation({ commit }, payload) {
     await this.$axios.post('/api/locations', payload).then((res) => {
-      if (res.status === 200) {
-        commit('ADD_LOCATION', payload)
+      if (res.status === 201) {
+        commit('ADD_LOCATION', res.data)
       } else {
         console.log(res.status)
       }
     })
+  },
+  async addBeeHiveToLocation({ commit }, payload) {
+    if (payload.locationId != null && payload.beeHiveId != 0) {
+      commit('ADD_BEEHIVE_TO_LOCATION', payload)
+    } else {
+      return null
+    }
   }
 }
