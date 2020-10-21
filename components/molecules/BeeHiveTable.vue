@@ -7,7 +7,11 @@
       :sort-desc.sync="sortDesc"
       responsive="sm"
     >
+      <template v-slot:cell(actions)="data">
+        <BeeHiveDeleteHiveButton :id="data.item._id" />
+      </template>
     </b-table>
+
     {{ beeHiveListByLoc }}
 
     <div>
@@ -20,8 +24,12 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
+import BeeHiveDeleteHiveButton from '~/components/atoms/beeHive/BeeHiveDeleteHiveButton'
 
 export default {
+  components: {
+    BeeHiveDeleteHiveButton
+  },
   data() {
     return {
       sortBy: 'name',
@@ -48,7 +56,6 @@ export default {
     beeHiveListByLoc() {
       let hives = []
       for (const hive of this.selectedLocation.hives) {
-        console.log(hive)
         hives.push(this.getBeeHiveIdByHiveId(hive.beeHiveID))
       }
       return hives

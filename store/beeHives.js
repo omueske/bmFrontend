@@ -17,12 +17,12 @@ export const mutations = {
 
   ADD_BEEHIVE(state, beeHive) {
     state.beeHiveList.push(beeHive)
-  }
+  },
 
-  // DELETE_LOCATION(state, beeHive) {
-  //   const delLocation = state.locationList.findIndex(x => x._id === location)
-  //   state.locationList.splice(delLocation, 1)
-  // }
+  DELETE_BEEHIVE(state, beeHiveId) {
+    const delBeeHive = state.beeHiveList.findIndex((x) => x._id === beeHiveId)
+    state.beeHiveList.splice(delBeeHive, 1)
+  }
 }
 export const actions = {
   async loadBeeHives({ commit }) {
@@ -38,7 +38,6 @@ export const actions = {
     // Add LocationID to Beehive
     payload.beeHive.locationId = payload.locationID
     await this.$axios.post('/api/beeHives', payload.beeHive).then((res) => {
-      console.log(res)
       if (res.status == 201) {
         commit('ADD_BEEHIVE', payload)
 
@@ -54,10 +53,18 @@ export const actions = {
       }
     })
   },
-
-  addLocationIdToBeeHive({ commit }, payload) {
-    commit('ADD_LOCATIONID_TO_BEEHIVE', payload)
+  async deleteBeeHive({ commit }, payload) {
+    await this.$axios.delete(`/api/beeHives/${payload._id}`).then((res) => {
+      if (res.status == 200) {
+        commit('DELETE_BEEHIVE', payload)
+      } else {
+        console.log(res.status)
+      }
+    })
   }
+  // addLocationIdToBeeHive({ commit }, payload) {
+  //   commit('ADD_LOCATIONID_TO_BEEHIVE', payload)
+  // }
 }
 export const getters = {
   getBeeHiveIdByHiveId: (state) => (id) => {
