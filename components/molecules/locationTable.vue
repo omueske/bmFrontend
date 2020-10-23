@@ -12,6 +12,7 @@
           @click.native="testmethode(data.item._id)"
           >Click</nuxt-link
         >
+        <LocationDeleteButton :id="data.item._id" />
       </template>
     </b-table>
     <div>
@@ -24,7 +25,11 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import LocationDeleteButton from '~/components/atoms/location/LocationDeleteButton'
 export default {
+  components: {
+    LocationDeleteButton
+  },
   data() {
     return {
       sortBy: 'age',

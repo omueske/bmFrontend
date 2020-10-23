@@ -49,17 +49,17 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import BeeHiveInputField from '~/components/atoms/beeHive/BeeHiveInputField.vue'
 import BeeHiveStatusSelect from '~/components/atoms/beeHive/BeeHiveStatusSelect.vue'
 import BeeHiveAddHiveButton from '~/components/atoms/beeHive/BeeHiveAddHiveButton.vue'
-import LocationSelect from '~/components/atoms/location/LocationSelect.vue'
+// import LocationSelect from '~/components/atoms/location/LocationSelect.vue'
 export default {
   components: {
     BeeHiveAddHiveButton,
     BeeHiveInputField,
-    BeeHiveStatusSelect,
-    LocationSelect
+    BeeHiveStatusSelect
+    // LocationSelect
   },
   props: {
     id: {

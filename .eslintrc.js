@@ -15,8 +15,8 @@ module.exports = {
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     'plugin:vue/recommended',
     'plugin:nuxt/recommended',
-    'eslint:recommended',
-    'plugin:prettier/recommended'
+    'eslint:recommended'
+    // 'plugin:prettier/recommended'
   ],
 
   // required to lint *.vue files
@@ -25,6 +25,8 @@ module.exports = {
   // add your custom rules here
   rules: {
     semi: [2, 'never'],
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/multiline-html-element-content-newline': 'off',
     'no-console': 'off',
     'vue/max-attributes-per-line': 'off',
     'vue/html-self-closing': [

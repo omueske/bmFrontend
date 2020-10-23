@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import LocationBox from '~/components/molecules/LocationBox.vue'
 export default {
   components: {
@@ -18,6 +18,10 @@ export default {
     ...mapState({
       locationList: (state) => state.locations.locationList
     })
+  },
+  methods: {
+    ...mapActions('locations', ['loadLocations']),
+    ...mapActions('beeHives', ['loadBeeHives'])
   }
 }
 </script>

@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import AddBeeHiveModal from '~/components/molecules/AddBeeHiveModal.vue'
 import BeeHiveBox from '~/components/molecules/BeeHiveBox.vue'
 export default {

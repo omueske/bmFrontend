@@ -8,9 +8,12 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import BeeHiveTable from '~/components/molecules/BeeHiveTable.vue'
 export default {
+  components: {
+    BeeHiveTable
+  },
   computed: {
     ...mapState({
       locationList: (state) => state.locations.locationList,

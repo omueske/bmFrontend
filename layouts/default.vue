@@ -6,9 +6,24 @@
 </template>
 <script>
 import NavBar from '~/components/molecules/NavBar.vue'
+import { mapState, mapActions } from 'vuex'
 export default {
   components: {
     NavBar
+  },
+  computed: {
+    ...mapState({
+      locationList: (state) => state.locations.locationList
+    })
+  },
+  methods: {
+    ...mapActions('locations', ['loadLocations']),
+    ...mapActions('beeHives', ['loadBeeHives'])
+  },
+
+  mounted: function () {
+    this.loadLocations()
+    this.loadBeeHives()
   }
 }
 </script>

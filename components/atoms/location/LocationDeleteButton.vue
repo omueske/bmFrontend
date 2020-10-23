@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   props: {
     id: {
@@ -17,17 +17,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('beeHives', ['getBeeHiveIdByHiveId'])
+    ...mapGetters('locations', ['getLocationById'])
   },
   methods: {
     ...mapActions('beeHives', ['deleteBeeHive']),
-    ...mapActions('locations', ['deleteBeeHiveFromLocation']),
+    ...mapActions('locations', ['deleteBeeHiveFromLocation', 'deleteLocation']),
     showDeleteMsgBox() {
-      const toDeleteBeeHive = this.getBeeHiveIdByHiveId(this.id)
-      console.log(toDeleteBeeHive)
+      const toDeleteLocation = this.getLocationById(this.id)
+      console.log(toDeleteLocation)
       this.$bvModal
         .msgBoxConfirm(
-          `Bitte Bestätigen Sie, dass das Volk mit der ID: ${this.id} ${toDeleteBeeHive.name} gelöscht werden soll.`,
+          `Bitte Bestätigen Sie, dass der Standort mit der ID: ${toDeleteLocation._id} ${toDeleteLocation.name} gelöscht werden soll.`,
           {
             title: 'Bitte bestätigen',
             size: 'sm',
@@ -43,9 +43,8 @@ export default {
         .then((value) => {
           if (value) {
             console.log('DELETE....')
-            console.log(toDeleteBeeHive)
-            this.deleteBeeHiveFromLocation(toDeleteBeeHive)
-            this.deleteBeeHive(toDeleteBeeHive)
+            console.log(toDeleteLocation)
+            this.deleteLocation(toDeleteLocation._id)
           }
         })
         .catch((err) => {

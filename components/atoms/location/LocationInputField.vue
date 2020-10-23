@@ -1,11 +1,7 @@
 <template>
   <div>
     <label :for="name">{{ name }}</label>
-    <b-form-input
-      v-model="inputVal"
-      size="sm"
-      :placeholder="placeholder"
-    ></b-form-input>
+    <b-form-input v-model="inputVal" size="sm" :placeholder="placeholder" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
-import vuex from 'vuex'
-import axios from 'axios'
+// import vuex from 'vuex'
+// import axios from 'axios'
 
 export const state = () => ({
   currentBeeHive: String,

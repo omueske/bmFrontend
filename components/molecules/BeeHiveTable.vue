@@ -54,11 +54,18 @@ export default {
     }),
     ...mapGetters('beeHives', ['getBeeHiveIdByHiveId']),
     beeHiveListByLoc() {
-      let hives = []
-      for (const hive of this.selectedLocation.hives) {
-        hives.push(this.getBeeHiveIdByHiveId(hive.beeHiveID))
+      if (
+        this.selectedLocation.hives &&
+        this.selectedLocation.hives.length > 0
+      ) {
+        let hives = []
+        for (const hive of this.selectedLocation.hives) {
+          hives.push(this.getBeeHiveIdByHiveId(hive.beeHiveID))
+        }
+        return hives
+      } else {
+        return []
       }
-      return hives
     }
   },
   methods: {

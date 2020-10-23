@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import LocationInputField from '~/components/atoms/location/LocationInputField.vue'
 export default {
   components: {

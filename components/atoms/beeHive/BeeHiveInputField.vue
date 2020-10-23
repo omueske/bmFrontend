@@ -6,7 +6,7 @@
       size="sm"
       :id="name"
       :placeholder="placeholder"
-    ></b-form-input>
+    />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
-import vuex from 'vuex'
-import axios from 'axios'
+// import vuex from 'vuex'
+// import axios from 'axios'
 
 export const state = () => ({
   selectedLocation: String,
@@ -23,10 +23,10 @@ export const mutations = {
   },
 
   ADD_BEEHIVE_TO_LOCATION(state, payload) {
-    locationIndex = state.locationList.findIndex(
+    const locationIndex = state.locationList.findIndex(
       (loc) => loc._id === payload.locationId
     )
-    state.locationlist[index].push(payload.beeHiveId)
+    state.locationlist[locationIndex].push(payload.beeHiveId)
   },
   DELETE_BEEHIVE_FROM_LOCATION(state, beeHive) {
     console.log(beeHive)
@@ -40,12 +40,13 @@ export const mutations = {
       console.log(delBeeHive)
       state.locationList[i].hives.splice(delBeeHive, 1)
     }
+  },
+  DELETE_LOCATION(state, locationId) {
+    const delLocation = state.locationList.findIndex(
+      (x) => x._id === locationId
+    )
+    state.locationList.splice(delLocation, 1)
   }
-
-  // DELETE_LOCATION(state, location) {
-  //   const delLocation = state.locationList.findIndex(x => x._id === location)
-  //   state.locationList.splice(delLocation, 1)
-  // }
 }
 export const actions = {
   async loadLocations({ commit }) {
@@ -76,6 +77,13 @@ export const actions = {
   async setSelectedLocation({ commit }, locationId) {
     commit('SET_SELECTED_LOCATION', locationId)
   },
+  async deleteLocation({ commit }, locationId) {
+    await this.$axios.delete(`/api/locations/${locationId}`).then((res) => {
+      if (res.status === 200) {
+        commit('DELETE_LOCATION', locationId)
+      }
+    })
+  },
   async deleteBeeHiveFromLocation({ commit }, payload) {
     console.log(payload)
     await this.$axios
@@ -85,5 +93,20 @@ export const actions = {
           commit('DELETE_BEEHIVE_FROM_LOCATION', payload)
         }
       })
+  }
+}
+
+export const getters = {
+  getLocationById: (state) => (id) => {
+    const location = state.locationList.find((x) => x._id === id)
+
+    // In Loadingphase of the Page, at can be that the getter is called before the store is filled.
+    // Then it will be come to an error
+    // So lets check if hives are loaded... if not set an dummy value
+    if (location == null || location._id == null) {
+      return { number: 'not set' }
+    } else {
+      return location
+    }
   }
 }

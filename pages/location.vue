@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Standort</h1>
-    <b-button pill variant="outline-secondary" v-b-modal.add-location-modal
+    <b-button pill v-b-modal.add-location-modal variant="outline-secondary"
       >Neuer Standort</b-button
     >
     <LocationTable />
@@ -11,13 +11,12 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import LocationBox from '~/components/molecules/LocationBox.vue'
 import AddLocationModal from '~/components/molecules/AddLocationModal.vue'
 import LocationTable from '~/components/molecules/LocationTable.vue'
 export default {
   components: {
-    LocationBox,
-    LocationTable
+    LocationTable,
+    AddLocationModal
   },
 
   computed: {
@@ -30,10 +29,6 @@ export default {
   methods: {
     ...mapActions('locations', ['loadLocations']),
     ...mapActions('beeHives', ['loadBeeHives'])
-  },
-  created: function () {
-    this.loadLocations()
-    this.loadBeeHives()
   }
 }
 </script>
