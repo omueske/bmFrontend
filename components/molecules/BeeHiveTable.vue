@@ -11,9 +11,6 @@
         <BeeHiveDeleteHiveButton :id="data.item._id" />
       </template>
     </b-table>
-
-    <!-- {{ beeHiveListByLoc }} -->
-
     <div>
       Sorting By: <b>{{ sortBy }}</b
       >, Sort Direction:
@@ -23,7 +20,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import BeeHiveDeleteHiveButton from '~/components/atoms/beeHive/BeeHiveDeleteHiveButton'
 
 export default {
@@ -52,41 +49,7 @@ export default {
       beeHiveList: (state) => state.beeHives.beeHiveList,
       selectedLocation: (state) => state.locations.selectedLocation
     }),
-    ...mapGetters('beeHives', [
-      'getBeeHiveIdByHiveId',
-      'getAllBeeHivesByLocId'
-    ]),
-    beeHiveListByLoc() {
-      if (
-        this.selectedLocation.hives &&
-        this.selectedLocation.hives.length > 0
-      ) {
-        let hives = []
-        console.log(this.selectedLocation)
-        // for (const hive of this.selectedLocation.hives) {
-        //   console.log(hive)
-        //   hives.push(this.getBeeHiveIdByHiveId(hive.beeHiveID))
-        // }
-        for (const lHive of this.selectedLocation.hives) {
-          console.log(lHive)
-          for (const hive of this.beeHiveList) {
-            console.table(hive)
-            if (hive._id == lHive.beeHiveID) {
-              hives.push(hive)
-            }
-          }
-        }
-        return hives
-      } else {
-        return []
-      }
-    }
-  },
-  methods: {
-    ...mapActions('locations', ['setSelectedLocation']),
-    testmethode(locationId) {
-      this.setSelectedLocation(locationId)
-    }
+    ...mapGetters('beeHives', ['getAllBeeHivesByLocId'])
   }
 }
 </script>

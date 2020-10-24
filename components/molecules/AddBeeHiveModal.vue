@@ -15,11 +15,6 @@
         name="Name"
         class="input-field"
       />
-      <!-- <LocationSelect
-        v-model="beeHive.locationId"
-        name="locationId"
-        class="input-field"
-      /> -->
       <BeeHiveInputField
         v-model="beeHive.number"
         placeholder="Bitte Nummer eingeben"
@@ -53,7 +48,7 @@ import { mapActions } from 'vuex'
 import BeeHiveInputField from '~/components/atoms/beeHive/BeeHiveInputField.vue'
 import BeeHiveStatusSelect from '~/components/atoms/beeHive/BeeHiveStatusSelect.vue'
 import BeeHiveAddHiveButton from '~/components/atoms/beeHive/BeeHiveAddHiveButton.vue'
-// import LocationSelect from '~/components/atoms/location/LocationSelect.vue'
+
 export default {
   components: {
     BeeHiveAddHiveButton,
@@ -74,8 +69,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('beeHives', ['addBeeHive']),
-    ...mapActions('beeHives', ['loadBeeHives']),
+    ...mapActions('beeHives', ['addBeeHive', 'loadBeeHives']),
     ...mapActions('locations', [
       'loadLocations',
       'addBeeHiveToLocation',

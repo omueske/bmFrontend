@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import AddBeeHiveModal from '~/components/molecules/AddBeeHiveModal.vue'
 import BeeHiveTable from '~/components/molecules/BeeHiveTable.vue'
 export default {
@@ -21,26 +21,7 @@ export default {
       locationList: (state) => state.locations.locationList,
       selectedLocation: (state) => state.locations.selectedLocation
     }),
-    ...mapGetters('beeHives', ['getAllBeeHivesByLocId']),
-    beeHive() {
-      let bh = {}
-      if (this.selectedLocation) {
-        bh = this.selectedLocation
-      } else {
-        console.log('-->0')
-        bh.hives = []
-        bh.name = 'name not set'
-      }
-      console.log(bh)
-      return bh
-    }
-  },
-  methods: {
-    ...mapActions('locations', ['setSelectedLocation'])
+    ...mapGetters('beeHives', ['getAllBeeHivesByLocId'])
   }
-  // mounted() {
-  //   console.log(this.$route.query.locationId)
-  //   this.setSelectedLocation(this.$route.query.locationId)
-  // }
 }
 </script>
