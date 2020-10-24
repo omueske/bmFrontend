@@ -19,8 +19,8 @@ export const mutations = {
     state.beeHiveList.push(beeHive)
   },
 
-  DELETE_BEEHIVE(state, beeHiveId) {
-    const delBeeHive = state.beeHiveList.findIndex((x) => x._id === beeHiveId)
+  DELETE_BEEHIVE(state, payload) {
+    const delBeeHive = state.beeHiveList.findIndex((x) => x._id === payload._id)
     state.beeHiveList.splice(delBeeHive, 1)
   }
 }
@@ -78,5 +78,15 @@ export const getters = {
     } else {
       return state.beeHiveList.find((beeHiveId) => beeHiveId._id === id)
     }
+  },
+  getAllBeeHivesByLocId: (state) => (id) => {
+    let hives = []
+    for (const hive of state.beeHiveList) {
+      console.log(`${hive.locationId} <--> ${id}`)
+      if (hive.locationId == id) {
+        hives.push(hive)
+      }
+    }
+    return hives
   }
 }

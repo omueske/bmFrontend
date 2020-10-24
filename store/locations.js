@@ -26,7 +26,11 @@ export const mutations = {
     const locationIndex = state.locationList.findIndex(
       (loc) => loc._id === payload.locationId
     )
-    state.locationlist[locationIndex].push(payload.beeHiveId)
+    console.log(locationIndex)
+    state.locationList[locationIndex].hives.push(payload.beeHiveId)
+    if (state.selectedLocation) {
+      state.selectedLocation = state.locationList[locationIndex]
+    }
   },
   DELETE_BEEHIVE_FROM_LOCATION(state, beeHive) {
     console.log(beeHive)
@@ -87,7 +91,7 @@ export const actions = {
   async deleteBeeHiveFromLocation({ commit }, payload) {
     console.log(payload)
     await this.$axios
-      .put(`/api/locations/${payload.locationId}/unlink/${payload._id}}`)
+      .put(`/api/locations/${payload.locationId}/unlink/${payload._id}`)
       .then((res) => {
         if (res.status === 200) {
           commit('DELETE_BEEHIVE_FROM_LOCATION', payload)

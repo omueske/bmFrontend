@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-table
-      :items="beeHiveListByLoc"
+      :items="getAllBeeHivesByLocId(selectedLocation._id)"
       :fields="fields"
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
@@ -12,7 +12,7 @@
       </template>
     </b-table>
 
-    {{ beeHiveListByLoc }}
+    <!-- {{ beeHiveListByLoc }} -->
 
     <div>
       Sorting By: <b>{{ sortBy }}</b
@@ -52,15 +52,29 @@ export default {
       beeHiveList: (state) => state.beeHives.beeHiveList,
       selectedLocation: (state) => state.locations.selectedLocation
     }),
-    ...mapGetters('beeHives', ['getBeeHiveIdByHiveId']),
+    ...mapGetters('beeHives', [
+      'getBeeHiveIdByHiveId',
+      'getAllBeeHivesByLocId'
+    ]),
     beeHiveListByLoc() {
       if (
         this.selectedLocation.hives &&
         this.selectedLocation.hives.length > 0
       ) {
         let hives = []
-        for (const hive of this.selectedLocation.hives) {
-          hives.push(this.getBeeHiveIdByHiveId(hive.beeHiveID))
+        console.log(this.selectedLocation)
+        // for (const hive of this.selectedLocation.hives) {
+        //   console.log(hive)
+        //   hives.push(this.getBeeHiveIdByHiveId(hive.beeHiveID))
+        // }
+        for (const lHive of this.selectedLocation.hives) {
+          console.log(lHive)
+          for (const hive of this.beeHiveList) {
+            console.table(hive)
+            if (hive._id == lHive.beeHiveID) {
+              hives.push(hive)
+            }
+          }
         }
         return hives
       } else {

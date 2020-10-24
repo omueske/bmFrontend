@@ -76,13 +76,21 @@ export default {
   methods: {
     ...mapActions('beeHives', ['addBeeHive']),
     ...mapActions('beeHives', ['loadBeeHives']),
-    ...mapActions('locations', ['loadLocations']),
+    ...mapActions('locations', [
+      'loadLocations',
+      'addBeeHiveToLocation',
+      'setSelectedLocation'
+    ]),
 
     async handleOk() {
       await this.addBeeHive({
         beeHive: this.beeHive,
         locationID: this.id
       }).then(() => {
+        this.addBeeHiveToLocation({
+          beeHive: this.beeHive,
+          locationId: this.id
+        })
         // now the Lists must be refreshed
         this.loadLocations()
         this.loadBeeHives()
@@ -99,4 +107,3 @@ export default {
   padding-bottom: 5px;
 }
 </style>
-

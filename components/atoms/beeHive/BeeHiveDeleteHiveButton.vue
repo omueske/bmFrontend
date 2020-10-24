@@ -44,8 +44,9 @@ export default {
           if (value) {
             console.log('DELETE....')
             console.log(toDeleteBeeHive)
-            this.deleteBeeHiveFromLocation(toDeleteBeeHive)
-            this.deleteBeeHive(toDeleteBeeHive)
+            this.deleteBeeHiveFromLocation(toDeleteBeeHive).then(
+              this.deleteBeeHive(toDeleteBeeHive)
+            )
           }
         })
         .catch((err) => {
