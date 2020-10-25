@@ -54,7 +54,6 @@ export default {
     BeeHiveAddHiveButton,
     BeeHiveInputField,
     BeeHiveStatusSelect
-    // LocationSelect
   },
   props: {
     id: {

@@ -2,9 +2,9 @@
   <div>
     <label :for="name">{{ name }}</label>
     <b-form-input
+      :id="name"
       v-model="inputVal"
       size="sm"
-      :id="name"
       :placeholder="placeholder"
     />
   </div>
