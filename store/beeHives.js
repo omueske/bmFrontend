@@ -22,6 +22,12 @@ export const mutations = {
   DELETE_BEEHIVE(state, payload) {
     const delBeeHive = state.beeHiveList.findIndex((x) => x._id === payload._id)
     state.beeHiveList.splice(delBeeHive, 1)
+  },
+  UPDATE_BEEHIVE(state, payload) {
+    const updateBeeHive = state.beeHiveList.findIndex(
+      (x) => x._id === payload._id
+    )
+    state.beeHiveList[updateBeeHive] = payload
   }
 }
 export const actions = {

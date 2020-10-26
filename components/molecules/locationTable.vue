@@ -10,8 +10,8 @@
         <nuxt-link
           :to="{ path: 'locationView', query: { locationId: data.item._id } }"
           @click.native="testmethode(data.item._id)"
-          >Click</nuxt-link
-        >
+          ><LocationViewButton
+        /></nuxt-link>
         <LocationDeleteButton :id="data.item._id" />
       </template>
     </b-table>
@@ -26,9 +26,11 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import LocationDeleteButton from '~/components/atoms/location/LocationDeleteButton'
+import LocationViewButton from '~/components/atoms/location/LocationViewButton'
 export default {
   components: {
-    LocationDeleteButton
+    LocationDeleteButton,
+    LocationViewButton
   },
   data() {
     return {

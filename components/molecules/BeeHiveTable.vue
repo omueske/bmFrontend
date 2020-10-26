@@ -9,6 +9,8 @@
     >
       <template v-slot:cell(actions)="data">
         <BeeHiveDeleteHiveButton :id="data.item._id" />
+        <BeeHiveUpdateHiveButton :id="data.item._id" />
+        <UpdateBeeHiveModal :id="data.item._id" />
       </template>
     </b-table>
     <div>
@@ -22,10 +24,14 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import BeeHiveDeleteHiveButton from '~/components/atoms/beeHive/BeeHiveDeleteHiveButton'
+import BeeHiveUpdateHiveButton from '~/components/atoms/beeHive/BeeHiveUpdateHiveButton'
+import UpdateBeeHiveModal from '~/components/molecules/UpdateBeeHiveModal'
 
 export default {
   components: {
-    BeeHiveDeleteHiveButton
+    BeeHiveDeleteHiveButton,
+    BeeHiveUpdateHiveButton,
+    UpdateBeeHiveModal
   },
   data() {
     return {
