@@ -18,14 +18,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      selected: null,
-      options: [
-        { value: 'active', text: 'Aktiv' },
-        { value: 'inactive', text: 'Inaktiv' }
-      ]
+      selected: null
     }
   },
   props: {
@@ -35,6 +32,16 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      configuration: (state) => state.configurations.configuration
+    }),
+    options() {
+      const opt = []
+      for (let conf of this.configuration.hives.statuses) {
+        opt.push({ value: conf.type, text: conf.type })
+      }
+      return opt
+    },
     inputVal: {
       get() {
         return this.beeHive
