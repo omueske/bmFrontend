@@ -67,6 +67,11 @@ export const actions = {
         console.log(res.status)
       }
     })
+  },
+
+  async setCurrentBeehive({ commit }, payload) {
+    console.log(payload)
+    await commit('SET_CURRENT_BEEHIVE', payload)
   }
   // addLocationIdToBeeHive({ commit }, payload) {
   //   commit('ADD_LOCATIONID_TO_BEEHIVE', payload)
@@ -75,6 +80,7 @@ export const actions = {
 export const getters = {
   getBeeHiveIdByHiveId: (state) => (id) => {
     const hive = state.beeHiveList.find((beeHive) => beeHive._id === id)
+    console.log(hive)
 
     // In Loadingphase of the Page, at can be that the getter is called before the store is filled.
     // Then it will be come to an error
@@ -82,7 +88,8 @@ export const getters = {
     if (hive == null) {
       return { number: 'not set' }
     } else {
-      return state.beeHiveList.find((beeHiveId) => beeHiveId._id === id)
+      // return state.beeHiveList.find((beeHiveId) => beeHiveId._id === id)
+      return hive
     }
   },
   getAllBeeHivesByLocId: (state) => (id) => {

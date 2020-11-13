@@ -8,7 +8,7 @@
       responsive="sm"
       ><template v-slot:cell(actions)="data">
         <nuxt-link
-          :to="{ path: 'locationView', query: { locationId: data.item._id } }"
+          :to="{ path: 'locationView' }"
           @click.native="testmethode(data.item._id)"
           ><LocationViewButton
         /></nuxt-link>

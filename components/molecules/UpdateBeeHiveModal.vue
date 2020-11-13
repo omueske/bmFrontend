@@ -4,39 +4,25 @@
       :id="'update-BeeHive-modal-' + id"
       hide-backdrop
       content-class="shadow"
-      title="Neues Volk anlegen"
+      title="Volk bearbeiten"
       @show="resetModal"
       @ok="handleOk"
     >
-      <BeeHiveInputField
-        v-model="beeHive.name"
-        placeholder="Bitte Name eingeben"
-        name="Name"
+      <BeeHiveInputFieldName v-model="beeHive" />
+      <BeeHiveInputFieldNumber v-model="beeHive" />
+      <BeeHiveStatusSelect
+        v-model="beeHive.status"
+        name="Status"
         class="input-field"
       />
-      <BeeHiveInputField
-        v-model="beeHive.number"
-        placeholder="Bitte Nummer eingeben"
-        name="Nummer"
-        class="input-field"
-      />
-      <BeeHiveInputField
-        v-model="beeHive.buildType"
+      <BeeHiveInputFieldComment v-model="beeHive" />
+
+      <!-- <BeeHiveInputField
+        v-model="modifiedBeeHive.buildType"
         placeholder="Bitte Rähmchenmaß / Bauart eingeben"
         name="Bauart"
         class="input-field"
-      />
-      <BeeHiveStatusSelect
-        v-model="beeHive.status"
-        name="beeHiveStatus"
-        class="input-field"
-      />
-      <BeeHiveInputField
-        v-model="beeHive.comment"
-        placeholder="Bitte Kommentar eingeben"
-        name="Kommentar"
-        class="input-field"
-      />
+      /> -->
       {{ beeHive }}
     </b-modal>
   </div>
@@ -47,23 +33,29 @@ import { mapActions } from 'vuex'
 import BeeHiveInputField from '~/components/atoms/beeHive/BeeHiveInputField.vue'
 import BeeHiveStatusSelect from '~/components/atoms/beeHive/BeeHiveStatusSelect.vue'
 import BeeHiveAddHiveButton from '~/components/atoms/beeHive/BeeHiveAddHiveButton.vue'
+import BeeHiveInputFieldName from '~/components/atoms/beeHive/BeeHiveInputFieldName.vue'
+import BeeHiveInputFieldNumber from '~/components/atoms/beeHive/BeeHiveInputFieldNumber.vue'
+import BeeHiveInputFieldComment from '~/components/atoms/beeHive/BeeHiveInputFieldComment.vue'
 
 export default {
   components: {
     BeeHiveAddHiveButton,
     BeeHiveInputField,
-    BeeHiveStatusSelect
+    BeeHiveStatusSelect,
+    BeeHiveInputFieldName,
+    BeeHiveInputFieldNumber,
+    BeeHiveInputFieldComment
   },
   props: {
     id: {
       type: String,
       required: true,
       default: null
-    }
-  },
-  data() {
-    return {
-      beeHive: {}
+    },
+    beeHive: {
+      type: Object,
+      required: true,
+      default: null
     }
   },
   methods: {

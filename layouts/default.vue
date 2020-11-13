@@ -18,12 +18,14 @@ export default {
   },
   methods: {
     ...mapActions('locations', ['loadLocations']),
-    ...mapActions('beeHives', ['loadBeeHives'])
+    ...mapActions('beeHives', ['loadBeeHives']),
+    ...mapActions('configurations', ['loadConfiguration'])
   },
 
-  mounted: function () {
+  mounted: function() {
     this.loadLocations()
     this.loadBeeHives()
+    this.loadConfiguration()
   }
 }
 </script>

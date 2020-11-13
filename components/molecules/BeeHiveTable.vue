@@ -9,8 +9,16 @@
     >
       <template v-slot:cell(actions)="data">
         <BeeHiveDeleteHiveButton :id="data.item._id" />
-        <BeeHiveUpdateHiveButton :id="data.item._id" />
-        <UpdateBeeHiveModal :id="data.item._id" />
+        <BeeHiveUpdateHiveButton
+          :id="data.item._id"
+          v-b-modal="'add-BeeHive-modal-' + data.item._id"
+          @mouseover="setCurrentBeehive(data.item)"
+        />
+        <UpdateBeeHiveModal
+          :id="data.item._id"
+          :beeHive="JSON.parse(JSON.stringify(data.item))"
+        />
+        {{ data.item }}
       </template>
     </b-table>
     <div>
@@ -22,7 +30,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import BeeHiveDeleteHiveButton from '~/components/atoms/beeHive/BeeHiveDeleteHiveButton'
 import BeeHiveUpdateHiveButton from '~/components/atoms/beeHive/BeeHiveUpdateHiveButton'
 import UpdateBeeHiveModal from '~/components/molecules/UpdateBeeHiveModal'
@@ -56,6 +64,9 @@ export default {
       selectedLocation: (state) => state.locations.selectedLocation
     }),
     ...mapGetters('beeHives', ['getAllBeeHivesByLocId'])
+  },
+  methods: {
+    ...mapActions('beeHives', ['setCurrentBeehive'])
   }
 }
 </script>
