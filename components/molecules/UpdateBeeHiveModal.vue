@@ -16,13 +16,6 @@
         class="input-field"
       />
       <BeeHiveInputFieldComment v-model="beeHive" />
-
-      <!-- <BeeHiveInputField
-        v-model="modifiedBeeHive.buildType"
-        placeholder="Bitte Rähmchenmaß / Bauart eingeben"
-        name="Bauart"
-        class="input-field"
-      /> -->
       {{ beeHive }}
     </b-modal>
   </div>
@@ -59,24 +52,16 @@ export default {
     }
   },
   methods: {
-    ...mapActions('beeHives', ['addBeeHive', 'loadBeeHives']),
-    ...mapActions('locations', [
-      'loadLocations',
-      'addBeeHiveToLocation',
-      'setSelectedLocation'
-    ]),
+    ...mapActions('beeHives', ['updateBeeHive', 'loadBeeHives']),
+    // ...mapActions('locations', [
+    //   'loadLocations',
+    //   'addBeeHiveToLocation',
+    //   'setSelectedLocation'
+    // ]),
 
     async handleOk() {
-      await this.addBeeHive({
-        beeHive: this.beeHive,
-        locationID: this.id
-      }).then(() => {
-        this.addBeeHiveToLocation({
-          beeHive: this.beeHive,
-          locationId: this.id
-        })
+      await this.updateBeeHive(this.beeHive).then(() => {
         // now the Lists must be refreshed
-        this.loadLocations()
         this.loadBeeHives()
       })
     },

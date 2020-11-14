@@ -72,10 +72,22 @@ export const actions = {
   async setCurrentBeehive({ commit }, payload) {
     console.log(payload)
     await commit('SET_CURRENT_BEEHIVE', payload)
-  }
+  },
   // addLocationIdToBeeHive({ commit }, payload) {
   //   commit('ADD_LOCATIONID_TO_BEEHIVE', payload)
   // }
+
+  async updateBeeHive({ commit }, payload) {
+    await this.$axios
+      .put(`/api/beeHives/${payload._id}`, payload)
+      .then((res) => {
+        if (res.status == 200) {
+          commit('UPDATE_BEEHIVE', payload)
+        } else {
+          console.log(res.status)
+        }
+      })
+  }
 }
 export const getters = {
   getBeeHiveIdByHiveId: (state) => (id) => {
