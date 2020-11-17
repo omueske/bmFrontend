@@ -18,7 +18,9 @@
           :id="data.item._id"
           :beeHive="JSON.parse(JSON.stringify(data.item))"
         />
-        {{ data.item }}
+        <div v-if="$route.params.debug">
+          {{ data.item }}
+        </div>
       </template>
     </b-table>
     <div>

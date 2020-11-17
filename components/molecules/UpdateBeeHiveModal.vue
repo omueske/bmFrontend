@@ -8,36 +8,40 @@
       @show="resetModal"
       @ok="handleOk"
     >
-      <BeeHiveInputFieldName v-model="beeHive" />
-      <BeeHiveInputFieldNumber v-model="beeHive" />
+      <BeeHiveInputFieldName v-model="beeHiveToUpdate" />
+      <BeeHiveInputFieldNumber v-model="beeHiveToUpdate" />
+      <BeeHiveSelectBuildType
+        v-model="beeHiveToUpdate.buildType"
+        name="buildType"
+        class="input-field"
+      />
       <BeeHiveStatusSelect
-        v-model="beeHive.status"
+        v-model="beeHiveToUpdate.status"
         name="Status"
         class="input-field"
       />
-      <BeeHiveInputFieldComment v-model="beeHive" />
-      {{ beeHive }}
+      <BeeHiveInputFieldComment v-model="beeHiveToUpdate" />
     </b-modal>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-import BeeHiveInputField from '~/components/atoms/beeHive/BeeHiveInputField.vue'
 import BeeHiveStatusSelect from '~/components/atoms/beeHive/BeeHiveStatusSelect.vue'
 import BeeHiveAddHiveButton from '~/components/atoms/beeHive/BeeHiveAddHiveButton.vue'
 import BeeHiveInputFieldName from '~/components/atoms/beeHive/BeeHiveInputFieldName.vue'
 import BeeHiveInputFieldNumber from '~/components/atoms/beeHive/BeeHiveInputFieldNumber.vue'
 import BeeHiveInputFieldComment from '~/components/atoms/beeHive/BeeHiveInputFieldComment.vue'
+import BeeHiveSelectBuildType from '~/components/atoms/beeHive/BeeHiveSelectBuildType.vue'
 
 export default {
   components: {
     BeeHiveAddHiveButton,
-    BeeHiveInputField,
     BeeHiveStatusSelect,
     BeeHiveInputFieldName,
     BeeHiveInputFieldNumber,
-    BeeHiveInputFieldComment
+    BeeHiveInputFieldComment,
+    BeeHiveSelectBuildType
   },
   props: {
     id: {
@@ -51,22 +55,31 @@ export default {
       default: null
     }
   },
+  computed: {
+    beeHiveToUpdate: {
+      get() {
+        let obj = JSON.parse(JSON.stringify(this.beeHive))
+        if (!obj.buildType) {
+          obj.buildType = ''
+        }
+        return obj
+      },
+      set(newBeeHive) {
+        return newBeeHive
+      }
+    }
+  },
   methods: {
     ...mapActions('beeHives', ['updateBeeHive', 'loadBeeHives']),
-    // ...mapActions('locations', [
-    //   'loadLocations',
-    //   'addBeeHiveToLocation',
-    //   'setSelectedLocation'
-    // ]),
 
     async handleOk() {
-      await this.updateBeeHive(this.beeHive).then(() => {
+      await this.updateBeeHive(this.beeHiveToUpdate).then(() => {
         // now the Lists must be refreshed
         this.loadBeeHives()
       })
     },
     resetModal() {
-      this.beeHive = {}
+      this.beeHiveToUpdate = {}
     }
   }
 }
