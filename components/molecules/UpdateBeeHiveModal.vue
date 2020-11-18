@@ -24,7 +24,6 @@
         v-model="beeHiveToUpdate.BeeHiveInputFieldComment"
       />
     </b-modal>
-    {{ beeHiveToUpdate }}
   </div>
 </template>
 
