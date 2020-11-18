@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="name">{{ name }}</label>
+    <label :for="name">Bauart</label>
     <b-form-select
       v-model="inputVal"
       :id="name"
@@ -32,20 +32,19 @@ export default {
     }),
     options() {
       const opt = []
-      for (let status of this.configuration.hives.statuses) {
-        opt.push({ value: status.type, text: status.name })
+      for (let buildType of this.configuration.hives.buildTypes) {
+        opt.push({
+          value: buildType.name,
+          text: buildType.name
+        })
       }
       return opt
     },
     inputVal: {
       get() {
-        console.log('GET')
-        console.log('this.value')
         return this.value
       },
       set(val) {
-        console.log('SET')
-        console.log(val)
         this.$emit('input', val)
       }
     }

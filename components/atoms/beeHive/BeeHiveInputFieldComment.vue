@@ -1,25 +1,21 @@
 <template>
   <div>
-    <label for="name">Kommentar</label>
-    <b-form-input
-      class="input"
-      :value="value.comment"
-      @input="updateValue('comment', $event)"
-    />
+    <label for="beeHiveComment">Kommentar</label>
+    <b-form-input class="input" v-model="inputVal" id="beeHiveComment" />
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    value: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    async updateValue(key, value) {
-      await this.$emit('input', { ...this.value, [key]: value })
+  props: ['value'],
+  computed: {
+    inputVal: {
+      get() {
+        return this.value
+      },
+      set(val) {
+        this.$emit('input', val)
+      }
     }
   }
 }
