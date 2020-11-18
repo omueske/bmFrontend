@@ -8,8 +8,8 @@
       @show="resetModal"
       @ok="handleOk"
     >
-      <BeeHiveInputFieldName v-model="beeHiveToUpdate" />
-      <BeeHiveInputFieldNumber v-model="beeHiveToUpdate" />
+      <BeeHiveInputFieldName v-model="beeHiveToUpdate.name" />
+      <BeeHiveInputFieldNumber v-model="beeHiveToUpdate.number" />
       <BeeHiveSelectBuildType
         v-model="beeHiveToUpdate.buildType"
         name="buildType"
@@ -20,8 +20,11 @@
         name="Status"
         class="input-field"
       />
-      <BeeHiveInputFieldComment v-model="beeHiveToUpdate" />
+      <BeeHiveInputFieldComment
+        v-model="beeHiveToUpdate.BeeHiveInputFieldComment"
+      />
     </b-modal>
+    {{ beeHiveToUpdate }}
   </div>
 </template>
 

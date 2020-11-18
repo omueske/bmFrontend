@@ -22,15 +22,10 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      selected: null
+      selected: this.value
     }
   },
-  props: {
-    name: {
-      type: String,
-      required: true
-    }
-  },
+  props: ['value', 'name'],
   computed: {
     ...mapState({
       configuration: (state) => state.configurations.configuration
@@ -47,7 +42,7 @@ export default {
     },
     inputVal: {
       get() {
-        return this.$emit('input')
+        return this.value
       },
       set(val) {
         this.$emit('input', val)
