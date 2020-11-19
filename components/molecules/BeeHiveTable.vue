@@ -36,12 +36,15 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import BeeHiveDeleteHiveButton from '~/components/atoms/beeHive/BeeHiveDeleteHiveButton'
 import BeeHiveUpdateHiveButton from '~/components/atoms/beeHive/BeeHiveUpdateHiveButton'
 import UpdateBeeHiveModal from '~/components/molecules/UpdateBeeHiveModal'
+import BeeHiveViewButton from '~/components/atoms/beeHive/BeeHiveViewButton'
 export default {
   components: {
     BeeHiveDeleteHiveButton,
     BeeHiveUpdateHiveButton,
-    UpdateBeeHiveModal
+    UpdateBeeHiveModal,
+    BeeHiveViewButton
   },
+  props: ['value'],
   data() {
     return {
       sortBy: 'name',
@@ -64,7 +67,15 @@ export default {
       beeHiveList: (state) => state.beeHives.beeHiveList,
       selectedLocation: (state) => state.locations.selectedLocation
     }),
-    ...mapGetters('beeHives', ['getAllBeeHivesByLocId'])
+    ...mapGetters('beeHives', ['getAllBeeHivesByLocId']),
+    inputVal: {
+      get() {
+        return this.value
+      },
+      set(val) {
+        this.$emit('input', val)
+      }
+    }
   },
   methods: {
     ...mapActions('beeHives', ['setCurrentBeehive'])

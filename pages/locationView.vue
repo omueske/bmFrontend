@@ -2,8 +2,14 @@
   <div>
     <h1>Standort {{ selectedLocation.name }}</h1>
     Anzahl Völker: {{ getAllBeeHivesByLocId(selectedLocation._id).length }}
-    <AddBeeHiveModal :id="selectedLocation._id" />
-    <BeeHiveTable />
+    <div v-if="showBeeHiveDetails">
+      <AddBeeHiveModal
+        v-model="showBeeHiveDetails"
+        :id="selectedLocation._id"
+      />
+      <BeeHiveTable />
+    </div>
+    <div v-else>Was ganz anderes :-)</div>
   </div>
 </template>
 
@@ -16,12 +22,26 @@ export default {
     AddBeeHiveModal,
     BeeHiveTable
   },
+  data() {
+    return {
+      showBeeHiveDetails: false
+    }
+  },
   computed: {
     ...mapState({
       locationList: (state) => state.locations.locationList,
       selectedLocation: (state) => state.locations.selectedLocation
     }),
     ...mapGetters('beeHives', ['getAllBeeHivesByLocId'])
+  },
+  methods: {
+    toggleHiveDetails() {
+      if (this.showBeeHiveDetails) {
+        this.showBeeHiveDetails = false
+      } else {
+        this.showBeeHiveDetails = true
+      }
+    }
   }
 }
 </script>

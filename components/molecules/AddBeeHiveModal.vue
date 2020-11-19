@@ -9,21 +9,20 @@
       @show="resetModal"
       @ok="handleOk"
     >
-      <BeeHiveInputField
+      <BeeHiveInputFieldName
         v-model="beeHive.name"
         placeholder="Bitte Name eingeben"
         name="Name"
         class="input-field"
       />
-      <BeeHiveInputField
+      <BeeHiveInputFieldNumber
         v-model="beeHive.number"
         placeholder="Bitte Nummer eingeben"
         name="Nummer"
         class="input-field"
       />
-      <BeeHiveInputField
+      <BeeHiveSelectBuildType
         v-model="beeHive.buildType"
-        placeholder="Bitte Rähmchenmaß / Bauart eingeben"
         name="Bauart"
         class="input-field"
       />
@@ -32,7 +31,7 @@
         name="beeHiveStatus"
         class="input-field"
       />
-      <BeeHiveInputField
+      <BeeHiveInputFieldComment
         v-model="beeHive.comment"
         placeholder="Bitte Kommentar eingeben"
         name="Kommentar"
@@ -45,15 +44,21 @@
 
 <script>
 import { mapActions } from 'vuex'
-import BeeHiveInputField from '~/components/atoms/beeHive/BeeHiveInputField.vue'
 import BeeHiveStatusSelect from '~/components/atoms/beeHive/BeeHiveStatusSelect.vue'
 import BeeHiveAddHiveButton from '~/components/atoms/beeHive/BeeHiveAddHiveButton.vue'
+import BeeHiveInputFieldName from '~/components/atoms/beeHive/BeeHiveInputFieldName.vue'
+import BeeHiveInputFieldNumber from '~/components/atoms/beeHive/BeeHiveInputFieldNumber.vue'
+import BeeHiveInputFieldComment from '~/components/atoms/beeHive/BeeHiveInputFieldComment.vue'
+import BeeHiveSelectBuildType from '~/components/atoms/beeHive/BeeHiveSelectBuildType.vue'
 
 export default {
   components: {
     BeeHiveAddHiveButton,
-    BeeHiveInputField,
-    BeeHiveStatusSelect
+    BeeHiveStatusSelect,
+    BeeHiveInputFieldName,
+    BeeHiveInputFieldNumber,
+    BeeHiveInputFieldComment,
+    BeeHiveSelectBuildType
   },
   props: {
     id: {
