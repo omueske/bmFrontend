@@ -20,9 +20,7 @@
         name="Status"
         class="input-field"
       />
-      <BeeHiveInputFieldComment
-        v-model="beeHiveToUpdate.BeeHiveInputFieldComment"
-      />
+      <BeeHiveInputFieldComment v-model="beeHiveToUpdate.comment" />
     </b-modal>
   </div>
 </template>
