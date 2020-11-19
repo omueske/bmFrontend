@@ -3,6 +3,7 @@
 
 export const state = () => ({
   currentBeeHive: String,
+  currentBeeHiveLogList: [],
   beeHiveList: []
 })
 
@@ -28,6 +29,9 @@ export const mutations = {
       (x) => x._id === payload._id
     )
     state.beeHiveList[updateBeeHive] = payload
+  },
+  SET_BEEHIVE_LOG(state, beeHiveLogs) {
+    state.currentBeeHiveLogList = beeHiveLogs
   }
 }
 export const actions = {
@@ -87,6 +91,15 @@ export const actions = {
           console.log(res.status)
         }
       })
+  },
+  async loadBeeHiveLogs({ commit }, payload) {
+    await this.$axios.get(`/api/beeHives/${payload}/logs`).then((res) => {
+      if (res.status === 200) {
+        commit('SET_BEEHIVE_LOG', res.data)
+      } else {
+        console.log(res.status)
+      }
+    })
   }
 }
 export const getters = {
