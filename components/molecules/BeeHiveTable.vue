@@ -21,10 +21,6 @@
           :id="data.item._id"
           @toggleBeeHiveDetails="toggleBeeHiveDetails(data.item._id)"
         />
-        iv: {{ beeHiveDetails }}
-        <div v-if="$route.params.debug">
-          {{ data.item }}
-        </div>
       </template>
     </b-table>
     <div>
@@ -89,7 +85,6 @@ export default {
     ...mapActions('beeHives', ['setCurrentBeehive']),
     toggleBeeHiveDetails(id) {
       this.beeHiveDetails = id
-      console.log('blubb')
       this.setCurrentBeehive(this.getBeeHiveIdByHiveId(id))
     }
   }

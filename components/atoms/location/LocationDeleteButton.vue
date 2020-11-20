@@ -24,7 +24,6 @@ export default {
     ...mapActions('locations', ['deleteBeeHiveFromLocation', 'deleteLocation']),
     showDeleteMsgBox() {
       const toDeleteLocation = this.getLocationById(this.id)
-      console.log(toDeleteLocation)
       this.$bvModal
         .msgBoxConfirm(
           `Bitte Bestätigen Sie, dass der Standort mit der ID: ${toDeleteLocation._id} ${toDeleteLocation.name} gelöscht werden soll.`,
@@ -42,8 +41,6 @@ export default {
         )
         .then((value) => {
           if (value) {
-            console.log('DELETE....')
-            console.log(toDeleteLocation)
             this.deleteLocation(toDeleteLocation._id)
           }
         })

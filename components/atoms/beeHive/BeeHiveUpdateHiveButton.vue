@@ -30,11 +30,8 @@ export default {
       const currBeeHive = this.setCurrentBeehive(this.id).then(function(
         result
       ) {
-        console.log(result)
         return result
       })
-      console.log(currBeeHive)
-      console.log(this.id)
       return currBeeHive
     }
   }

@@ -26,22 +26,17 @@ export const mutations = {
     const locationIndex = state.locationList.findIndex(
       (loc) => loc._id === payload.locationId
     )
-    console.log(locationIndex)
     state.locationList[locationIndex].hives.push(payload.beeHiveId)
     if (state.selectedLocation) {
       state.selectedLocation = state.locationList[locationIndex]
     }
   },
   DELETE_BEEHIVE_FROM_LOCATION(state, beeHive) {
-    console.log(beeHive)
-    console.log(state.locationList.length)
     const arrLen = state.locationList.length
     for (let i = 0; i < arrLen; i++) {
-      console.log(i)
       const delBeeHive = state.locationList[i].hives.findIndex(
         (x) => x.beeHiveID == beeHive._id
       )
-      console.log(delBeeHive)
       state.locationList[i].hives.splice(delBeeHive, 1)
     }
   },
@@ -89,7 +84,6 @@ export const actions = {
     })
   },
   async deleteBeeHiveFromLocation({ commit }, payload) {
-    console.log(payload)
     await this.$axios
       .put(`/api/locations/${payload.locationId}/unlink/${payload._id}`)
       .then((res) => {

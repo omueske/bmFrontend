@@ -51,10 +51,8 @@ export default {
       get() {
         let optionsArray = []
         for (const loc of this.locationList) {
-          console.log(loc)
           optionsArray.push({ value: loc._id, text: loc.name })
         }
-        console.log(optionsArray)
         return optionsArray
       }
     }

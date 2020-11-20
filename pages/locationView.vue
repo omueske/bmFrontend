@@ -11,7 +11,7 @@
     </div>
     <div v-else>
       Was ganz anderes :-)
-      <b-button @click="unsetCurrentBeeHive()">
+      <b-button @click="setCurrentBeehive({})">
         <b-icon icon="eye" aria-hidden="true" />
       </b-button>
       {{ currentBeeHive }}
@@ -42,18 +42,7 @@ export default {
     ...mapGetters('beeHives', ['getAllBeeHivesByLocId'])
   },
   methods: {
-    ...mapActions('beeHives', ['setCurrentBeehive']),
-    toggleHiveDetails() {
-      if (this.showBeeHiveDetails) {
-        this.showBeeHiveDetails = false
-      } else {
-        this.showBeeHiveDetails = true
-      }
-    },
-    unsetCurrentBeeHive() {
-      console.log('blubb')
-      this.setCurrentBeehive({})
-    }
+    ...mapActions('beeHives', ['setCurrentBeehive'])
   }
 }
 </script>
