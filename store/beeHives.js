@@ -2,7 +2,7 @@
 // import axios from 'axios'
 
 export const state = () => ({
-  currentBeeHive: String,
+  currentBeeHive: {},
   currentBeeHiveLogList: [],
   beeHiveList: []
 })
@@ -13,7 +13,7 @@ export const mutations = {
   },
 
   SET_CURRENT_BEEHIVE(state, beeHive) {
-    state.currentBeeHive = beeHive._id
+    state.currentBeeHive = beeHive
   },
 
   ADD_BEEHIVE(state, beeHive) {

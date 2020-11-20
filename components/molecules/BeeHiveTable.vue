@@ -12,12 +12,16 @@
         <BeeHiveUpdateHiveButton
           :id="data.item._id"
           v-b-modal="'add-BeeHive-modal-' + data.item._id"
-          @mouseover="setCurrentBeehive(data.item)"
         />
         <UpdateBeeHiveModal
           :id="data.item._id"
           :beeHive="JSON.parse(JSON.stringify(data.item))"
         />
+        <BeeHiveViewButton
+          :id="data.item._id"
+          @toggleBeeHiveDetails="toggleBeeHiveDetails(data.item._id)"
+        />
+        iv: {{ beeHiveDetails }}
         <div v-if="$route.params.debug">
           {{ data.item }}
         </div>
@@ -58,7 +62,8 @@ export default {
         { key: 'createdAt', label: 'Erstellt am', sortable: true },
         { key: 'updatedAt', label: 'letztes Update', sortable: false },
         { key: 'actions', label: 'Aktionen', sortable: false }
-      ]
+      ],
+      beeHiveDetails: ''
     }
   },
   computed: {
@@ -67,7 +72,10 @@ export default {
       beeHiveList: (state) => state.beeHives.beeHiveList,
       selectedLocation: (state) => state.locations.selectedLocation
     }),
-    ...mapGetters('beeHives', ['getAllBeeHivesByLocId']),
+    ...mapGetters('beeHives', [
+      'getAllBeeHivesByLocId',
+      'getBeeHiveIdByHiveId'
+    ]),
     inputVal: {
       get() {
         return this.value
@@ -78,7 +86,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('beeHives', ['setCurrentBeehive'])
+    ...mapActions('beeHives', ['setCurrentBeehive']),
+    toggleBeeHiveDetails(id) {
+      this.beeHiveDetails = id
+      console.log('blubb')
+      this.setCurrentBeehive(this.getBeeHiveIdByHiveId(id))
+    }
   }
 }
 </script>
