@@ -7,11 +7,9 @@
       :sort-desc.sync="sortDesc"
       responsive="sm"
       ><template v-slot:cell(actions)="data">
-        <nuxt-link
-          :to="{ path: 'locationView' }"
-          @click.native="testmethode(data.item._id)"
-          ><LocationViewButton
-        /></nuxt-link>
+        <LocationViewButton
+          @toggleLocationDetails="toggleLocationDetails(data.item._id)"
+        />
         <LocationDeleteButton :id="data.item._id" />
       </template>
     </b-table>
@@ -24,7 +22,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import LocationDeleteButton from '~/components/atoms/location/LocationDeleteButton'
 import LocationViewButton from '~/components/atoms/location/LocationViewButton'
 export default {
@@ -49,12 +47,17 @@ export default {
   computed: {
     ...mapState({
       locationList: (state) => state.locations.locationList
-    })
+    }),
+    ...mapGetters('locations', ['getLocationById'])
   },
   methods: {
     ...mapActions('locations', ['setSelectedLocation']),
     testmethode(locationId) {
       this.setSelectedLocation(locationId)
+    },
+    toggleLocationDetails(id) {
+      // this.beeHiveDetails = id
+      this.setSelectedLocation(id)
     }
   }
 }

@@ -2,7 +2,7 @@
 // import axios from 'axios'
 
 export const state = () => ({
-  selectedLocation: String,
+  selectedLocation: Object,
   locationList: []
 })
 
@@ -12,10 +12,14 @@ export const mutations = {
   },
 
   SET_SELECTED_LOCATION(state, locationId) {
-    const loc = state.locationList.find(
-      (location) => location._id === locationId
-    )
-    state.selectedLocation = loc
+    if (locationId != null) {
+      const loc = state.locationList.find(
+        (location) => location._id === locationId
+      )
+      state.selectedLocation = loc
+    } else {
+      state.selectedLocation = {}
+    }
   },
 
   ADD_LOCATION(state, loc) {

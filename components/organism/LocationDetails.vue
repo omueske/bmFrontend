@@ -1,8 +1,10 @@
 <template>
   <div>
+    <b-button @click="clearSelected()">
+      Standort-Liste
+    </b-button>
     <h1>Standort {{ selectedLocation.name }}</h1>
     Anzahl Völker: {{ getAllBeeHivesByLocId(selectedLocation._id).length }}
-    <!-- <div v-if="currentBeeHive._id == null"> -->
     <div v-if="!Object.prototype.hasOwnProperty.call(currentBeeHive, '_id')">
       <AddBeeHiveModal
         v-model="showBeeHiveDetails"
@@ -48,13 +50,12 @@ export default {
     ...mapGetters('beeHives', ['getAllBeeHivesByLocId'])
   },
   methods: {
-    ...mapActions('beeHives', ['setCurrentBeehive'])
-    // isEmpty(obj) {
-    //   for (var key in obj) {
-    //     if (obj.hasOwnProperty(key)) return false
-    //   }
-    //   return true
-    // }
+    ...mapActions('beeHives', ['setCurrentBeehive']),
+    ...mapActions('locations', ['setSelectedLocation']),
+    clearSelected() {
+      this.setCurrentBeehive({})
+      this.setSelectedLocation(null)
+    }
   }
 }
 </script>
