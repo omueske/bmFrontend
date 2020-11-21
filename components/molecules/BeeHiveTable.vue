@@ -8,19 +8,21 @@
       responsive="sm"
     >
       <template v-slot:cell(actions)="data">
-        <BeeHiveDeleteHiveButton :id="data.item._id" />
-        <BeeHiveUpdateHiveButton
-          :id="data.item._id"
-          v-b-modal="'add-BeeHive-modal-' + data.item._id"
-        />
-        <UpdateBeeHiveModal
-          :id="data.item._id"
-          :beeHive="JSON.parse(JSON.stringify(data.item))"
-        />
-        <BeeHiveViewButton
-          :id="data.item._id"
-          @toggleBeeHiveDetails="toggleBeeHiveDetails(data.item._id)"
-        />
+        <b-button-group>
+          <BeeHiveDeleteHiveButton :id="data.item._id" />
+          <BeeHiveUpdateHiveButton
+            :id="data.item._id"
+            v-b-modal="'add-BeeHive-modal-' + data.item._id"
+          />
+          <UpdateBeeHiveModal
+            :id="data.item._id"
+            :beeHive="JSON.parse(JSON.stringify(data.item))"
+          />
+          <BeeHiveViewButton
+            :id="data.item._id"
+            @toggleBeeHiveDetails="toggleBeeHiveDetails(data.item._id)"
+          />
+        </b-button-group>
       </template>
     </b-table>
     <div>

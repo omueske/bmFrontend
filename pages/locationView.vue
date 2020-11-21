@@ -2,7 +2,8 @@
   <div>
     <h1>Standort {{ selectedLocation.name }}</h1>
     Anzahl Völker: {{ getAllBeeHivesByLocId(selectedLocation._id).length }}
-    <div v-if="currentBeeHive._id == null">
+    <!-- <div v-if="currentBeeHive._id == null"> -->
+    <div v-if="!Object.prototype.hasOwnProperty.call(currentBeeHive, '_id')">
       <AddBeeHiveModal
         v-model="showBeeHiveDetails"
         :id="selectedLocation._id"
@@ -10,11 +11,11 @@
       <BeeHiveTable />
     </div>
     <div v-else>
-      Was ganz anderes :-)
-      <b-button @click="setCurrentBeehive({})">
-        <b-icon icon="eye" aria-hidden="true" />
-      </b-button>
       {{ currentBeeHive }}
+      <b-button @click="setCurrentBeehive({})">
+        zurück
+      </b-button>
+      <BeeHiveDetails />
     </div>
   </div>
 </template>
@@ -23,10 +24,12 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import AddBeeHiveModal from '~/components/molecules/AddBeeHiveModal.vue'
 import BeeHiveTable from '~/components/molecules/BeeHiveTable.vue'
+import BeeHiveDetails from '~/components/organism/BeeHiveDetails.vue'
 export default {
   components: {
     AddBeeHiveModal,
-    BeeHiveTable
+    BeeHiveTable,
+    BeeHiveDetails
   },
   data() {
     return {
@@ -43,6 +46,12 @@ export default {
   },
   methods: {
     ...mapActions('beeHives', ['setCurrentBeehive'])
+    // isEmpty(obj) {
+    //   for (var key in obj) {
+    //     if (obj.hasOwnProperty(key)) return false
+    //   }
+    //   return true
+    // }
   }
 }
 </script>

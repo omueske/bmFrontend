@@ -49,7 +49,6 @@ export default {
   computed: {
     ...mapState({
       locationList: (state) => state.locations.locationList
-      // beeHiveList: (state) => state.beeHives.beeHiveList
     })
   },
   methods: {
