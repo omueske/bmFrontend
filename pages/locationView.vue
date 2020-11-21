@@ -16,6 +16,7 @@
         zurück
       </b-button>
       <BeeHiveDetails />
+      <BeeHiveDetailsLogs />
     </div>
   </div>
 </template>
@@ -25,11 +26,13 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import AddBeeHiveModal from '~/components/molecules/AddBeeHiveModal.vue'
 import BeeHiveTable from '~/components/molecules/BeeHiveTable.vue'
 import BeeHiveDetails from '~/components/organism/BeeHiveDetails.vue'
+import BeeHiveDetailsLogs from '~/components/organism/BeeHiveDetailsLogs.vue'
 export default {
   components: {
     AddBeeHiveModal,
     BeeHiveTable,
-    BeeHiveDetails
+    BeeHiveDetails,
+    BeeHiveDetailsLogs
   },
   data() {
     return {
