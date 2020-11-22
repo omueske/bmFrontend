@@ -17,12 +17,14 @@ export default {
     })
   },
   methods: {
-    ...mapActions('locations', ['loadLocations']),
-    ...mapActions('beeHives', ['loadBeeHives']),
+    ...mapActions('locations', ['loadLocations', 'setSelectedLocation']),
+    ...mapActions('beeHives', ['loadBeeHives', 'setCurrentBeehive']),
     ...mapActions('configurations', ['loadConfiguration'])
   },
 
   mounted: function() {
+    this.setSelectedLocation(null)
+    this.setCurrentBeehive({})
     this.loadLocations()
     this.loadBeeHives()
     this.loadConfiguration()

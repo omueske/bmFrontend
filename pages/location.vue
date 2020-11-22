@@ -35,7 +35,12 @@ export default {
   },
   methods: {
     ...mapActions('locations', ['loadLocations', 'setSelectedLocation']),
-    ...mapActions('beeHives', ['loadBeeHives'])
+    ...mapActions('beeHives', ['loadBeeHives', 'setCurrentBeehive'])
+  },
+  mounted() {
+    // To avoid loaded Hives and Locations when the page was allready loaded
+    this.setSelectedLocation(null)
+    this.setCurrentBeehive({})
   }
 }
 </script>
