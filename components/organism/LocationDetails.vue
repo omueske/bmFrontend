@@ -1,8 +1,12 @@
 <template>
   <div>
-    <b-button @click="clearSelected()">
+    <b-button
+      v-if="!Object.prototype.hasOwnProperty.call(currentBeeHive, '_id')"
+      @click="clearSelected()"
+    >
       Standort-Liste
     </b-button>
+    <b-button v-else @click="setCurrentBeehive({})"> zurück </b-button>
     <h1>Standort {{ selectedLocation.name }}</h1>
     Anzahl Völker: {{ getAllBeeHivesByLocId(selectedLocation._id).length }}
     <div v-if="!Object.prototype.hasOwnProperty.call(currentBeeHive, '_id')">
@@ -13,10 +17,6 @@
       <BeeHiveTable />
     </div>
     <div v-else>
-      {{ currentBeeHive }}
-      <b-button @click="setCurrentBeehive({})">
-        zurück
-      </b-button>
       <BeeHiveDetails />
       <BeeHiveDetailsLogs />
     </div>

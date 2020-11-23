@@ -19,7 +19,8 @@
     "core-js": "^3.6.5",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
-    "nuxt": "^2.14.6"
+    "nuxt": "^2.14.6",
+    "vue2-datepicker": "^3.8.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",

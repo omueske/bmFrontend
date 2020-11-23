@@ -8,42 +8,23 @@
       title="Neuen Eintrag anlegen"
       @show="resetModal"
       @ok="handleOk"
-      >test
-      <!-- <BeeHiveInputFieldName
-        v-model="beeHive.name"
-        placeholder="Bitte Name eingeben"
-        name="Name"
-        class="input-field"
+    >
+      <label for="beeHiveLogdate">Datum:</label>
+      <Date-Picker
+        v-model="beeHiveLog.date"
+        id="beeHiveLogdate"
+        name="beeHiveLogdate"
+        valueType="format"
       />
-      <BeeHiveInputFieldNumber
-        v-model="beeHive.number"
-        placeholder="Bitte Nummer eingeben"
-        name="Nummer"
-        class="input-field"
-      />
-      <BeeHiveSelectBuildType
-        v-model="beeHive.buildType"
-        name="Bauart"
-        class="input-field"
-      />
-      <BeeHiveStatusSelect
-        v-model="beeHive.status"
-        name="beeHiveStatus"
-        class="input-field"
-      />
-      <BeeHiveInputFieldComment
-        v-model="beeHive.comment"
-        placeholder="Bitte Kommentar eingeben"
-        name="Kommentar"
-        class="input-field"
-      />
-      {{ beeHive }} -->
+      -- {{ beeHiveLog.date }}--
     </b-modal>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css'
 
 export default {
   components: {
@@ -53,10 +34,12 @@ export default {
     // BeeHiveInputFieldNumber,
     // BeeHiveInputFieldComment,
     // BeeHiveSelectBuildType
+    DatePicker
   },
   data() {
     return {
-      beeHiveLog: {}
+      beeHiveLog: {},
+      testvm: ''
     }
   },
   computed: {
