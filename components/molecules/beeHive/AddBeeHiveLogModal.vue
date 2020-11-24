@@ -34,7 +34,7 @@
         </b-card>
         <b-card bg-variant="light">
           <label>Fütterung</label>
-          <div v-for="(feed, index) in beeHiveLog.food" :key="feed">
+          <div v-for="feed in beeHiveLog.food" :key="feed.name">
             <feed
               v-model="feed.amountInGrammm"
               :name="feed.name"
@@ -42,8 +42,8 @@
             />
           </div>
         </b-card>
-        <b-card> <meakness v-model="beeHiveLog.meakness" /></b-card>
-        <b-card> <steadily v-model="beeHiveLog.steadily" /></b-card>
+        <b-card> <meakness v-model="beeHiveLog.meakness"/></b-card>
+        <b-card> <steadily v-model="beeHiveLog.steadily"/></b-card>
       </b-container>
       {{ beeHiveLog }}
     </b-modal>

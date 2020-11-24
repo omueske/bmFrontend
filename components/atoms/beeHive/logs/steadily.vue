@@ -6,7 +6,7 @@
     <b-col sm="7">
       <b-form-select
         v-model="inputVal"
-        :id="steadily"
+        id="steadily"
         :options="options"
         class="mb-3"
     /></b-col>
