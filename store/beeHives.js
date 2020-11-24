@@ -30,8 +30,11 @@ export const mutations = {
     )
     state.beeHiveList[updateBeeHive] = payload
   },
-  SET_BEEHIVE_LOG(state, beeHiveLogs) {
-    state.currentBeeHiveLogList = beeHiveLogs
+  SET_BEEHIVE_LOG(state, beeHiveLog) {
+    state.currentBeeHiveLogList = beeHiveLog
+  },
+  ADD_BEEHIVE_LOG(state, beeHiveLog) {
+    state.beeHiveList.push(beeHiveLog)
   }
 }
 export const actions = {
@@ -88,6 +91,18 @@ export const actions = {
         }
       })
   },
+  async addBeeHiveLog({ commit }, payload) {
+    // Add LocationID to Beehive
+    await this.$axios
+      .post(`/api/beeHives/${payload.beeHiveId}/logs`, payload)
+      .then((res) => {
+        if (res.status == 201) {
+          commit('ADD_BEEHIVE_LOG', payload)
+        } else {
+          console.log(res.status)
+        }
+      })
+  },
   async loadBeeHiveLogs({ commit }, payload) {
     await this.$axios.get(`/api/beeHives/${payload}/logs`).then((res) => {
       if (res.status === 200) {
@@ -98,6 +113,7 @@ export const actions = {
     })
   }
 }
+
 export const getters = {
   getBeeHiveIdByHiveId: (state) => (id) => {
     const hive = state.beeHiveList.find((beeHive) => beeHive._id === id)

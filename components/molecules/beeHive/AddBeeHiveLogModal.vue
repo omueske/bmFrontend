@@ -118,24 +118,24 @@ export default {
     })
   },
   methods: {
-    ...mapActions('beeHives', ['addBeeHive', 'loadBeeHives']),
+    ...mapActions('beeHives', ['addBeeHiveLog']),
 
     async handleOk() {
-      await this.addBeeHive({
-        beeHive: this.beeHive,
-        locationID: this.id
-      }).then(() => {
-        this.addBeeHiveToLocation({
-          beeHive: this.beeHive,
-          locationId: this.id
-        })
-        // now the Lists must be refreshed
-        this.loadLocations()
-        this.loadBeeHives()
-      })
+      this.beeHiveLog.beeHiveId = this.currentBeeHive._id
+      await this.addBeeHiveLog(this.beeHiveLog)
+      console.log(this.beeHiveLog)
+      //this.beeHiveLog = {}
+      this.resetModal
     },
     resetModal() {
-      this.beeHive = {}
+      this.beeHiveLog = {
+        meteorology: {},
+        frames: {},
+        food: [
+          { name: 'Sirup', amountInGrammm: 0 },
+          { name: 'Futterteig', amountInGrammm: 0 }
+        ]
+      }
     }
   }
 }
