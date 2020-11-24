@@ -106,6 +106,7 @@ export const actions = {
   async loadBeeHiveLogs({ commit }, payload) {
     await this.$axios.get(`/api/beeHives/${payload}/logs`).then((res) => {
       if (res.status === 200) {
+        console.log(res.data)
         commit('SET_BEEHIVE_LOG', res.data)
       } else {
         console.log(res.status)

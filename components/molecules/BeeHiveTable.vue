@@ -84,10 +84,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions('beeHives', ['setCurrentBeehive']),
+    ...mapActions('beeHives', ['setCurrentBeehive', 'loadBeeHiveLogs']),
     toggleBeeHiveDetails(id) {
       this.beeHiveDetails = id
       this.setCurrentBeehive(this.getBeeHiveIdByHiveId(id))
+      this.loadBeeHiveLogs(id)
     }
   }
 }
