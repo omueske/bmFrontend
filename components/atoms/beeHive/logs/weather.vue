@@ -1,21 +1,20 @@
 <template>
   <b-row>
-    <b-col sm="3">
-      <label for="emptyFrame">Leerrahmen:</label>
+    <b-col sm="5">
+      <label for="weather">Witterung</label>
     </b-col>
     <b-col sm="7">
-      <b-form-input
-        id="emptyFrame"
+      <b-form-select
         v-model="inputVal"
-        type="range"
-        min="-100"
-        max="+100"
-      /> </b-col
-    ><b-col>{{ inputVal }}</b-col>
+        id="weather"
+        :options="options"
+        class="mb-3"
+    /></b-col>
   </b-row>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   props: ['value'],
   computed: {
@@ -26,7 +25,10 @@ export default {
       set(val) {
         this.$emit('input', val)
       }
-    }
+    },
+    ...mapState({
+      options: (state) => state.configurations.configuration.weather
+    })
   }
 }
 </script>

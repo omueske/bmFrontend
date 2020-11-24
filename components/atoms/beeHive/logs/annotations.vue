@@ -1,17 +1,16 @@
 <template>
   <b-row>
     <b-col sm="3">
-      <label for="foodComb">Futterwaben:</label>
+      <label for="annotations">Anmerkungen:</label>
     </b-col>
-    <b-col sm="7">
-      <b-form-input
-        id="foodComb"
+    <b-col sm="10">
+      <b-form-textarea
         v-model="inputVal"
-        type="range"
-        min="-100"
-        max="+100"
-      /> </b-col
-    ><b-col>{{ inputVal }}</b-col>
+        id="annotations"
+        size="sm"
+        placeholder="Anmerkungen..."
+      />
+    </b-col>
   </b-row>
 </template>
 <script>

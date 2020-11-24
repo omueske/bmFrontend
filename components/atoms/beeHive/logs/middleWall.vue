@@ -3,7 +3,7 @@
     <b-col sm="3">
       <label for="middleFrame">Mittelwände:</label>
     </b-col>
-    <b-col sm="4">
+    <b-col sm="7">
       <b-form-input
         id="middleFrame"
         v-model="inputVal"

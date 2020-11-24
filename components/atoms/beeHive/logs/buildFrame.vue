@@ -3,7 +3,7 @@
     <b-col sm="3">
       <label for="buildFrame"> Baurahmen:</label>
     </b-col>
-    <b-col sm="4">
+    <b-col sm="7">
       <b-form-input
         id="buildFrame"
         v-model="inputVal"

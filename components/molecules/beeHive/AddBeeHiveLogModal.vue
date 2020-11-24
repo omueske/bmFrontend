@@ -8,14 +8,23 @@
       title="Neuen Eintrag anlegen"
       @show="resetModal"
       @ok="handleOk"
-      ><b-container fluid>
-        <label for="beeHiveLogdate">Datum:</label>
-        <Date-Picker
-          v-model="beeHiveLog.date"
-          id="beeHiveLogdate"
-          name="beeHiveLogdate"
-          valueType="format"
-        /><br /><br />
+      ><b-container fluid
+        ><b-row
+          ><b-col> <label for="beeHiveLogdate">Datum:</label></b-col
+          ><b-col>
+            <Date-Picker
+              v-model="beeHiveLog.date"
+              class="detailBox"
+              id="beeHiveLogdate"
+              name="beeHiveLogdate"
+              valueType="format"/></b-col></b-row
+        ><b-row
+          ><b-col> <weather v-model="beeHiveLog.meteorology.weather"/></b-col
+        ></b-row>
+        <b-row
+          ><b-col>
+            <temperature v-model="beeHiveLog.meteorology.temperature"/></b-col
+        ></b-row>
         <b-card bg-variant="light">
           <label for="findings">Allgemeiner Befund:</label>
           <b-form-checkbox-group
@@ -44,6 +53,7 @@
         </b-card>
         <b-card> <meakness v-model="beeHiveLog.meakness"/></b-card>
         <b-card> <steadily v-model="beeHiveLog.steadily"/></b-card>
+        <b-card> <annotations v-model="beeHiveLog.annotations"/></b-card>
       </b-container>
       {{ beeHiveLog }}
     </b-modal>
@@ -62,6 +72,10 @@ import emptyFrame from '~/components/atoms/beeHive/logs/emptyFrame.vue'
 import feed from '~/components/atoms/beeHive/logs/feed.vue'
 import meakness from '~/components/atoms/beeHive/logs/meakness.vue'
 import steadily from '~/components/atoms/beeHive/logs/steadily.vue'
+import annotations from '~/components/atoms/beeHive/logs/annotations.vue'
+import weather from '~/components/atoms/beeHive/logs/weather.vue'
+import temperature from '~/components/atoms/beeHive/logs/temperature.vue'
+
 export default {
   components: {
     DatePicker,
@@ -72,11 +86,15 @@ export default {
     emptyFrame,
     feed,
     meakness,
-    steadily
+    steadily,
+    annotations,
+    temperature,
+    weather
   },
   data() {
     return {
       beeHiveLog: {
+        meteorology: {},
         frames: {},
         food: [
           { name: 'Sirup', amountInGrammm: 0 },

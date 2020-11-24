@@ -3,7 +3,7 @@
     <b-col sm="3">
       <label for="broodComb">Brutwaben:</label>
     </b-col>
-    <b-col sm="4">
+    <b-col sm="7">
       <b-form-input
         id="broodComb"
         v-model="inputVal"

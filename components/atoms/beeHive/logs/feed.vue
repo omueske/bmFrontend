@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col>{{ name }}</b-col>
-    <b-col sm="4">
+    <b-col sm="6">
       <b-form-input
         :id="name"
         v-model="inputVal"
@@ -10,6 +10,7 @@
         max="50000"
       />
     </b-col>
+    <b-col>{{ inputVal }}g</b-col>
   </b-row>
 </template>
 
