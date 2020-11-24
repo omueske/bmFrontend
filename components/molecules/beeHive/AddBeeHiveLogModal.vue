@@ -8,31 +8,43 @@
       title="Neuen Eintrag anlegen"
       @show="resetModal"
       @ok="handleOk"
-    >
-      <label for="beeHiveLogdate">Datum:</label>
-      <Date-Picker
-        v-model="beeHiveLog.date"
-        id="beeHiveLogdate"
-        name="beeHiveLogdate"
-        valueType="format"
-      /><br /><br />
-      <b-card bg-variant="light">
-        <label for="findings">Allgemeiner Befund:</label>
-        <b-form-checkbox-group
-          id="checkbox-group-1"
-          class="detailBox"
-          v-model="beeHiveLog.findings"
-          :options="options"
-          name="findings"
-        />
-        <b-container fluid>
+      ><b-container fluid>
+        <label for="beeHiveLogdate">Datum:</label>
+        <Date-Picker
+          v-model="beeHiveLog.date"
+          id="beeHiveLogdate"
+          name="beeHiveLogdate"
+          valueType="format"
+        /><br /><br />
+        <b-card bg-variant="light">
+          <label for="findings">Allgemeiner Befund:</label>
+          <b-form-checkbox-group
+            id="checkbox-group-1"
+            class="detailBox"
+            v-model="beeHiveLog.findings"
+            :options="options"
+            name="findings"
+          />
+          <label>Gegeben und Genommen:</label>
           <buildFrame v-model="beeHiveLog.frames.buildFrame" />
           <middleWall v-model="beeHiveLog.frames.middleFrame" />
           <broodComb v-model="beeHiveLog.frames.broodComb" />
           <foodComb v-model="beeHiveLog.frames.foodComb" />
           <emptyFrame v-model="beeHiveLog.frames.emptyFrame" />
-        </b-container>
-      </b-card>
+        </b-card>
+        <b-card bg-variant="light">
+          <label>Fütterung</label>
+          <div v-for="(feed, index) in beeHiveLog.food" :key="feed">
+            <feed
+              v-model="feed.amountInGrammm"
+              :name="feed.name"
+              :amount="feed.amount"
+            />
+          </div>
+        </b-card>
+        <b-card> <meakness v-model="beeHiveLog.meakness" /></b-card>
+        <b-card> <steadily v-model="beeHiveLog.steadily" /></b-card>
+      </b-container>
       {{ beeHiveLog }}
     </b-modal>
   </div>
@@ -47,6 +59,9 @@ import middleWall from '~/components/atoms/beeHive/logs/middleWall.vue'
 import broodComb from '~/components/atoms/beeHive/logs/broodComb.vue'
 import foodComb from '~/components/atoms/beeHive/logs/foodComb.vue'
 import emptyFrame from '~/components/atoms/beeHive/logs/emptyFrame.vue'
+import feed from '~/components/atoms/beeHive/logs/feed.vue'
+import meakness from '~/components/atoms/beeHive/logs/meakness.vue'
+import steadily from '~/components/atoms/beeHive/logs/steadily.vue'
 export default {
   components: {
     DatePicker,
@@ -54,17 +69,28 @@ export default {
     middleWall,
     broodComb,
     foodComb,
-    emptyFrame
+    emptyFrame,
+    feed,
+    meakness,
+    steadily
   },
   data() {
     return {
       beeHiveLog: {
-        frames: {}
+        frames: {},
+        food: [
+          { name: 'Sirup', amountInGrammm: 0 },
+          { name: 'Futterteig', amountInGrammm: 0 }
+        ]
       },
       options: [
         { text: 'Eier', value: 'eggs' },
         { text: 'offen', value: 'openBreed' },
         { text: 'verdeckelt', value: 'cappedBreed' }
+      ],
+      feeds: [
+        { name: 'Sirup', amountInGrammm: 0 },
+        { name: 'Futterteig', amountInGrammm: 0 }
       ]
     }
   },
