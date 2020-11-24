@@ -26,90 +26,11 @@
           name="findings"
         />
         <b-container fluid>
-          <b-row>
-            <b-col sm="3">
-              <label for="buildFrame"> Baurahmen:</label>
-            </b-col>
-            <b-col sm="4">
-              <b-form-input
-                id="buildFrame"
-                v-model="beeHiveLog.frames.buildFrame"
-                type="range"
-                min="-100"
-                max="+100"
-              /> </b-col
-            ><b-col>{{ beeHiveLog.frames.buildFrame }}</b-col>
-          </b-row>
-          <b-row>
-            <b-col sm="3">
-              <label for="middleFrame">Mittelwände:</label>
-            </b-col>
-            <b-col sm="4">
-              <b-form-input
-                id="middleFrame"
-                v-model="beeHiveLog.frames.middleFrame"
-                type="range"
-                min="-100"
-                max="+100"
-              /> </b-col
-            ><b-col>{{ beeHiveLog.frames.middleFrame }}</b-col>
-          </b-row>
-          <b-row>
-            <b-col sm="3">
-              <label for="emptyCombe">Leerwaben:</label>
-            </b-col>
-            <b-col sm="4">
-              <b-form-input
-                id="emptyCombe"
-                v-model="beeHiveLog.frames.emptyComb"
-                type="range"
-                min="-100"
-                max="+100"
-              /> </b-col
-            ><b-col>{{ beeHiveLog.frames.emptyComb }}</b-col>
-          </b-row>
-          <b-row>
-            <b-col sm="3">
-              <label for="broodComb">Brutwaben:</label>
-            </b-col>
-            <b-col sm="4">
-              <b-form-input
-                id="broodComb"
-                v-model="beeHiveLog.frames.broodComb"
-                type="range"
-                min="-100"
-                max="+100"
-              /> </b-col
-            ><b-col>{{ beeHiveLog.frames.broodComb }}</b-col>
-          </b-row>
-          <b-row>
-            <b-col sm="3">
-              <label for="foodComb">Futterwaben:</label>
-            </b-col>
-            <b-col sm="4">
-              <b-form-input
-                id="foodComb"
-                v-model="beeHiveLog.frames.foodComb"
-                type="range"
-                min="-100"
-                max="+100"
-              /> </b-col
-            ><b-col>{{ beeHiveLog.frames.foodComb }}</b-col>
-          </b-row>
-          <b-row>
-            <b-col sm="3">
-              <label for="emptyFrame">Leerrahmen:</label>
-            </b-col>
-            <b-col sm="4">
-              <b-form-input
-                id="emptyFrame"
-                v-model="beeHiveLog.frames.emptyFrame"
-                type="range"
-                min="-100"
-                max="+100"
-              /> </b-col
-            ><b-col>{{ beeHiveLog.frames.emptyFrame }}</b-col>
-          </b-row>
+          <buildFrame v-model="beeHiveLog.frames.buildFrame" />
+          <middleWall v-model="beeHiveLog.frames.middleFrame" />
+          <broodComb v-model="beeHiveLog.frames.broodComb" />
+          <foodComb v-model="beeHiveLog.frames.foodComb" />
+          <emptyFrame v-model="beeHiveLog.frames.emptyFrame" />
         </b-container>
       </b-card>
       {{ beeHiveLog }}
@@ -121,22 +42,24 @@
 import { mapActions, mapState } from 'vuex'
 import DatePicker from 'vue2-datepicker'
 import 'vue2-datepicker/index.css'
-
+import buildFrame from '~/components/atoms/beeHive/logs/buildFrame.vue'
+import middleWall from '~/components/atoms/beeHive/logs/middleWall.vue'
+import broodComb from '~/components/atoms/beeHive/logs/broodComb.vue'
+import foodComb from '~/components/atoms/beeHive/logs/foodComb.vue'
+import emptyFrame from '~/components/atoms/beeHive/logs/emptyFrame.vue'
 export default {
   components: {
-    DatePicker
+    DatePicker,
+    buildFrame,
+    middleWall,
+    broodComb,
+    foodComb,
+    emptyFrame
   },
   data() {
     return {
       beeHiveLog: {
-        frames: {
-          buildFrame: 0,
-          middleFrame: 0,
-          emptyComb: 0,
-          broodComb: 0,
-          foodComb: 0,
-          emptyFrame: 0
-        }
+        frames: {}
       },
       options: [
         { text: 'Eier', value: 'eggs' },
