@@ -34,7 +34,7 @@ export const mutations = {
     state.currentBeeHiveLogList = beeHiveLog
   },
   ADD_BEEHIVE_LOG(state, beeHiveLog) {
-    state.beeHiveList.push(beeHiveLog)
+    state.currentBeeHiveLogList.push(beeHiveLog)
   }
 }
 export const actions = {
