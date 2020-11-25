@@ -107,6 +107,13 @@ export const actions = {
     await this.$axios.get(`/api/beeHives/${payload}/logs`).then((res) => {
       if (res.status === 200) {
         console.log(res.data)
+        const moment = require('moment')
+        moment.locale('de')
+        res.data.forEach(function(value, i) {
+          console.log(value.date + ' ' + i)
+          res.data[i].date = moment(value.date).format('YYYY-MM-DD')
+        })
+
         commit('SET_BEEHIVE_LOG', res.data)
       } else {
         console.log(res.status)
