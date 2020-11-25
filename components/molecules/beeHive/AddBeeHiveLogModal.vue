@@ -17,13 +17,13 @@
               class="detailBox"
               id="beeHiveLogdate"
               name="beeHiveLogdate"
-              valueType="format"/></b-col></b-row
+              valueType="format" /></b-col></b-row
         ><b-row
-          ><b-col> <weather v-model="beeHiveLog.meteorology.weather"/></b-col
+          ><b-col> <weather v-model="beeHiveLog.meteorology.weather" /></b-col
         ></b-row>
         <b-row
           ><b-col>
-            <temperature v-model="beeHiveLog.meteorology.temperature"/></b-col
+            <temperature v-model="beeHiveLog.meteorology.temperature" /></b-col
         ></b-row>
         <b-card bg-variant="light">
           <label for="findings">Allgemeiner Befund:</label>
@@ -51,9 +51,9 @@
             />
           </div>
         </b-card>
-        <b-card> <meakness v-model="beeHiveLog.meakness"/></b-card>
-        <b-card> <steadily v-model="beeHiveLog.steadily"/></b-card>
-        <b-card> <annotations v-model="beeHiveLog.annotations"/></b-card>
+        <b-card> <meakness v-model="beeHiveLog.meakness" /></b-card>
+        <b-card> <steadily v-model="beeHiveLog.steadily" /></b-card>
+        <b-card> <annotations v-model="beeHiveLog.annotations" /></b-card>
       </b-container>
       {{ beeHiveLog }}
     </b-modal>
@@ -107,8 +107,8 @@ export default {
         { text: 'verdeckelt', value: 'cappedBreed' }
       ],
       feeds: [
-        { name: 'Sirup', amountInGrammm: 0 },
-        { name: 'Futterteig', amountInGrammm: 0 }
+        { name: 'Sirup', amountInGramm: 0 },
+        { name: 'Futterteig', amountInGramm: 0 }
       ]
     }
   },
