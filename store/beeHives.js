@@ -41,6 +41,12 @@ export const mutations = {
       (x) => x._id === payload
     )
     state.currentBeeHiveLogList.splice(delBeeHiveLog, 1)
+  },
+  UPDATE_BEEHIVE_LOG(state, payload) {
+    const updateBeeHiveLog = state.currentBeeHiveLogList.findIndex(
+      (x) => x._id === payload._id
+    )
+    state.beeHiveList[updateBeeHiveLog] = payload
   }
 }
 export const actions = {
@@ -112,7 +118,6 @@ export const actions = {
   async loadBeeHiveLogs({ commit }, payload) {
     await this.$axios.get(`/api/beeHives/${payload}/logs`).then((res) => {
       if (res.status === 200) {
-        console.log(res.data)
         const moment = require('moment')
         moment.locale('de')
         res.data.forEach(function(value, i) {
@@ -133,6 +138,18 @@ export const actions = {
         console.log(res.status)
       }
     })
+  },
+
+  async updateBeeHiveLog({ commit }, payload) {
+    await this.$axios
+      .put(`/api/beeHives/logs${payload._id}`, payload)
+      .then((res) => {
+        if (res.status == 200) {
+          commit('UPDATE_BEEHIVE_LOG', payload)
+        } else {
+          console.log(res.status)
+        }
+      })
   }
 }
 
@@ -158,5 +175,20 @@ export const getters = {
       }
     }
     return hives
+  },
+  getBeeHiveLogById: (state) => (id) => {
+    const hiveLog = state.currentBeeHiveLogList.find(
+      (beeHiveLog) => beeHiveLog._id === id
+    )
+
+    // In Loadingphase of the Page, at can be that the getter is called before the store is filled.
+    // Then it will be come to an error
+    // So lets check if hives are loaded... if not set an dummy value
+    if (hiveLog == null) {
+      return { number: 'not set' }
+    } else {
+      // return state.beeHiveList.find((beeHiveId) => beeHiveId._id === id)
+      return hiveLog
+    }
   }
 }

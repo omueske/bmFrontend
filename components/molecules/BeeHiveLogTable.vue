@@ -14,18 +14,8 @@
       <template v-slot:cell(actions)="data">
         <b-button-group>
           <BeeHiveLogDeleteButton :id="data.item._id" />
-          <!-- <BeeHiveUpdateHiveButton
-            :id="data.item._id"
-            v-b-modal="'add-BeeHive-modal-' + data.item._id"
-          />
-          <UpdateBeeHiveModal
-            :id="data.item._id"
-            :beeHive="JSON.parse(JSON.stringify(data.item))"
-          />
-          <BeeHiveViewButton
-            :id="data.item._id"
-            @toggleBeeHiveDetails="toggleBeeHiveDetails(data.item._id)"
-          /> -->
+          <BeeHiveLogUpdateButton :id="data.item._id" />
+          <UpdateBeeHiveLogModal :id="data.item._id" />
         </b-button-group>
       </template>
     </b-table>
@@ -40,10 +30,14 @@
 <script>
 import { mapState } from 'vuex'
 import BeeHiveLogDeleteButton from '~/components/atoms/beeHive/logs/BeeHiveLogDeleteButton.vue'
+import BeeHiveLogUpdateButton from '~/components/atoms/beeHive/logs/BeeHiveLogUpdateButton.vue'
+import UpdateBeeHiveLogModal from '~/components/molecules/beeHive/UpdateBeeHiveLogModal.vue'
 
 export default {
   components: {
-    BeeHiveLogDeleteButton
+    BeeHiveLogDeleteButton,
+    BeeHiveLogUpdateButton,
+    UpdateBeeHiveLogModal
   },
   props: ['value'],
   data() {

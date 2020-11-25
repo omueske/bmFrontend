@@ -39,13 +39,9 @@ export default {
     },
     inputVal: {
       get() {
-        console.log('GET')
-        console.log('this.value')
         return this.value
       },
       set(val) {
-        console.log('SET')
-        console.log(val)
         this.$emit('input', val)
       }
     }
