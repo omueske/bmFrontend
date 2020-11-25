@@ -8,8 +8,9 @@
     </b-button>
     <b-button v-else @click="setCurrentBeehive({})"> zurück </b-button>
     <h1>Standort {{ selectedLocation.name }}</h1>
-    Anzahl Völker: {{ getAllBeeHivesByLocId(selectedLocation._id).length }}
+
     <div v-if="!Object.prototype.hasOwnProperty.call(currentBeeHive, '_id')">
+      Anzahl Völker: {{ getAllBeeHivesByLocId(selectedLocation._id).length }}
       <AddBeeHiveModal
         v-model="showBeeHiveDetails"
         :id="selectedLocation._id"

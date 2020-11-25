@@ -1,5 +1,6 @@
 <template
-  ><div class="detailBox">
+  >
+  <div class="detailBox">
     <beeHiveDetailsHeadline />
     <beeHiveDetailsNumber />
     <beeHiveDetailsQueenInfo />
@@ -31,6 +32,7 @@ export default {
 <style scoped>
 .detailBox {
   border-bottom: 1px solid #000;
+  border-top: 1px solid #000;
   margin-bottom: 3em;
 }
 </style>

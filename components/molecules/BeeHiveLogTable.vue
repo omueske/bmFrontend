@@ -9,8 +9,25 @@
     >
       <template #table-caption
         >BR=Baurahmen, MW=Mittelwand, BW=Brutwabe, FW=Futterwabe,
-        LR=Leerwabe</template
+        LR=Leerrähmchen</template
       >
+      <template v-slot:cell(actions)="data">
+        <b-button-group>
+          <BeeHiveLogDeleteButton :id="data.item._id" />
+          <!-- <BeeHiveUpdateHiveButton
+            :id="data.item._id"
+            v-b-modal="'add-BeeHive-modal-' + data.item._id"
+          />
+          <UpdateBeeHiveModal
+            :id="data.item._id"
+            :beeHive="JSON.parse(JSON.stringify(data.item))"
+          />
+          <BeeHiveViewButton
+            :id="data.item._id"
+            @toggleBeeHiveDetails="toggleBeeHiveDetails(data.item._id)"
+          /> -->
+        </b-button-group>
+      </template>
     </b-table>
     <div>
       Sorting By: <b>{{ sortBy }}</b
@@ -22,12 +39,16 @@
 
 <script>
 import { mapState } from 'vuex'
+import BeeHiveLogDeleteButton from '~/components/atoms/beeHive/logs/BeeHiveLogDeleteButton.vue'
 
 export default {
+  components: {
+    BeeHiveLogDeleteButton
+  },
   props: ['value'],
   data() {
     return {
-      sortBy: 'name',
+      sortBy: 'date',
       sortDesc: false,
       fields: [
         // { key: '_id', sortable: true },
@@ -51,7 +72,8 @@ export default {
         { key: 'steadily', label: 'Wabenstetigkeit', sortable: true },
         { key: 'food[0].amountInGramm', label: 'Sirup in g', sortable: true },
         { key: 'food[1].amountInGramm', label: 'Teig in g', sortable: true },
-        { key: 'annotations', label: 'Anmerkungen', sortable: false }
+        { key: 'annotations', label: 'Anmerkungen', sortable: false },
+        { key: 'actions', label: 'Aktionen', sortable: false }
       ]
     }
   },

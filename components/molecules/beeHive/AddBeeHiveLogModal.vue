@@ -128,7 +128,9 @@ export default {
       this.resetModal
     },
     resetModal() {
+      const moment = require('moment')
       this.beeHiveLog = {
+        date: moment().format('YYYY-MM-DD'),
         meteorology: {},
         frames: {},
         food: [

@@ -35,6 +35,12 @@ export const mutations = {
   },
   ADD_BEEHIVE_LOG(state, beeHiveLog) {
     state.currentBeeHiveLogList.push(beeHiveLog)
+  },
+  DELETE_BEEHIVE_LOG(state, payload) {
+    const delBeeHiveLog = state.currentBeeHiveLogList.findIndex(
+      (x) => x._id === payload
+    )
+    state.currentBeeHiveLogList.splice(delBeeHiveLog, 1)
   }
 }
 export const actions = {
@@ -110,11 +116,19 @@ export const actions = {
         const moment = require('moment')
         moment.locale('de')
         res.data.forEach(function(value, i) {
-          console.log(value.date + ' ' + i)
           res.data[i].date = moment(value.date).format('YYYY-MM-DD')
         })
 
         commit('SET_BEEHIVE_LOG', res.data)
+      } else {
+        console.log(res.status)
+      }
+    })
+  },
+  async deleteBeeHiveLog({ commit }, payload) {
+    await this.$axios.delete(`/api/beeHives/logs/${payload}`).then((res) => {
+      if (res.status == 200) {
+        commit('DELETE_BEEHIVE_LOG', payload)
       } else {
         console.log(res.status)
       }
