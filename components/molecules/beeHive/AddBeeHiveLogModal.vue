@@ -45,7 +45,7 @@
           <label>Fütterung</label>
           <div v-for="feed in beeHiveLog.food" :key="feed.name">
             <feed
-              v-model="feed.amountInGrammm"
+              v-model="feed.amountInGramm"
               :name="feed.name"
               :amount="feed.amount"
             />
@@ -97,8 +97,8 @@ export default {
         meteorology: {},
         frames: {},
         food: [
-          { name: 'Sirup', amountInGrammm: 0 },
-          { name: 'Futterteig', amountInGrammm: 0 }
+          { name: 'Sirup', amountInGramm: 0 },
+          { name: 'Futterteig', amountInGramm: 0 }
         ]
       },
       options: [
@@ -132,8 +132,8 @@ export default {
         meteorology: {},
         frames: {},
         food: [
-          { name: 'Sirup', amountInGrammm: 0 },
-          { name: 'Futterteig', amountInGrammm: 0 }
+          { name: 'Sirup', amountInGramm: 0 },
+          { name: 'Futterteig', amountInGramm: 0 }
         ]
       }
     }

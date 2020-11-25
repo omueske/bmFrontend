@@ -27,16 +27,15 @@ export default {
       fields: [
         // { key: '_id', sortable: true },
         { key: 'date', label: 'Datum', sortable: true },
-        { key: 'frames.buildFrame', label: 'BR', sortable: true },
-        { key: 'frames.middleFrame', label: 'MW', sortable: true },
-        { key: 'frames.broodComb', label: 'BW', sortable: true },
-        { key: 'frames.foodComb', label: 'FW', sortable: true },
-        { key: 'frames.emptyFrame', label: 'LR', sortable: true },
-        { key: 'food[0].amountInGramm', label: 'Sirup', sortable: true },
-        { key: 'food[1].amountInGramm', label: 'Teig', sortable: true },
-        { key: 'annotations', label: 'Anmerkungen', sortable: true }
-      ],
-      beeHiveDetails: ''
+        { key: 'frames.buildFrame', label: 'BR', sortable: false },
+        { key: 'frames.middleFrame', label: 'MW', sortable: false },
+        { key: 'frames.broodComb', label: 'BW', sortable: false },
+        { key: 'frames.foodComb', label: 'FW', sortable: false },
+        { key: 'frames.emptyFrame', label: 'LR', sortable: false },
+        { key: 'food[0].amountInGramm', label: 'Sirup in g', sortable: true },
+        { key: 'food[1].amountInGramm', label: 'Teig in g', sortable: true },
+        { key: 'annotations', label: 'Anmerkungen', sortable: false }
+      ]
     }
   },
   computed: {
@@ -52,13 +51,5 @@ export default {
       }
     }
   }
-  // methods: {
-  //   ...mapActions('beeHives', ['setCurrentBeehive', 'loadBeeHiveLogs']),
-  //   toggleBeeHiveDetails(id) {
-  //     this.beeHiveDetails = id
-  //     this.setCurrentBeehive(this.getBeeHiveIdByHiveId(id))
-  //     this.loadBeeHiveLogs(id)
-  //   }
-  // }
 }
 </script>
