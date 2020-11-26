@@ -1,0 +1,27 @@
+{
+    "meteorology": {
+        "weather":"",
+        "temperature": ""
+    },
+    "frames": {
+        "buildFrame": "",
+        "middleFrame": "",
+        "broodComb": "",
+        "foodComb": "",
+        "emptyFrame": ""
+    },
+    "food": [
+        {
+            "name": "",
+            "amountInGramm": ""
+        },
+        {
+            "name": "",
+            "amountInGramm": ""
+        }
+    ],
+    "date": "",
+    "steadily": null,
+    "annotations": "",
+    "beeHiveId": ""
+}

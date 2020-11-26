@@ -5,45 +5,51 @@
       :id="'update-BeeHiveLog-modal-' + id"
       hide-backdrop
       content-class="shadow"
-      title="Neuen Eintrag anlegen"
+      title="Eintrag ändern"
       @show="resetModal"
       @ok="handleOk"
-      ><b-container fluid
+    >
+      <b-container fluid
         ><b-row
           ><b-col> <label for="beeHiveLogdate">Datum:</label></b-col
           ><b-col>
             <Date-Picker
-              v-model="beeHiveLog.date"
+              v-model="beeHiveLogToUpdate.date"
               class="detailBox"
               id="beeHiveLogdate"
               name="beeHiveLogdate"
-              valueType="format" /></b-col></b-row
-        ><b-row
-          ><b-col> <weather v-model="beeHiveLog.meteorology.weather" /></b-col
+              valueType="format"/></b-col
         ></b-row>
-        <b-row
+        <!-- <b-row
           ><b-col>
-            <temperature v-model="beeHiveLog.meteorology.temperature" /></b-col
-        ></b-row>
-        <b-card bg-variant="light">
-          <label for="findings">Allgemeiner Befund:</label>
-          <b-form-checkbox-group
-            id="checkbox-group-1"
-            class="detailBox"
-            v-model="beeHiveLog.findings"
-            :options="options"
-            name="findings"
-          />
-          <label>Gegeben und Genommen:</label>
-          <buildFrame v-model="beeHiveLog.frames.buildFrame" />
-          <middleWall v-model="beeHiveLog.frames.middleFrame" />
-          <broodComb v-model="beeHiveLog.frames.broodComb" />
-          <foodComb v-model="beeHiveLog.frames.foodComb" />
-          <emptyFrame v-model="beeHiveLog.frames.emptyFrame" />
-        </b-card>
+            <weather v-model="beeHiveLogToUpdate.meteorology.weather"/></b-col
+        ></b-row> -->
+        <!-- <b-row
+          ><b-col>
+            <temperature
+              v-model="beeHiveLogToUpdate.meteorology.temperature"/></b-col
+        ></b-row> -->
+        <!-- <b-card bg-variant="light"> -->
+        <label for="findings">Allgemeiner Befund:</label>
+        <b-form-checkbox-group
+          id="checkbox-group-1"
+          class="detailBox"
+          v-model="beeHiveLogToUpdate.findings"
+          :options="options"
+          name="findings"
+        />
+        <label>Gegeben und Genommen:</label>
+        <buildFrame v-model="beeHiveLogToUpdate.frames.buildFrame" />
+        <middleWall v-model="beeHiveLogToUpdate.frames.middleFrame" />
+        <broodComb v-model="beeHiveLogToUpdate.frames.broodComb" />
+        <foodComb v-model="beeHiveLogToUpdate.frames.foodComb" />
+        <emptyFrame
+          v-model="beeHiveLogToUpdate.frames.emptyFrame"
+        /><!-- </b-card
+        >
         <b-card bg-variant="light">
           <label>Fütterung</label>
-          <div v-for="feed in beeHiveLog.food" :key="feed.name">
+          <div v-for="feed in beeHiveLogToUpdate.food" :key="feed.name">
             <feed
               v-model="feed.amountInGramm"
               :name="feed.name"
@@ -51,11 +57,14 @@
             />
           </div>
         </b-card>
-        <b-card> <meakness v-model="beeHiveLog.meakness" /></b-card>
-        <b-card> <steadily v-model="beeHiveLog.steadily" /></b-card>
-        <b-card> <annotations v-model="beeHiveLog.annotations" /></b-card>
+        <b-card> <meakness v-model="beeHiveLogToUpdate.meakness"/></b-card>
+        <b-card> <steadily v-model="beeHiveLogToUpdate.steadily"/></b-card>
+        <b-card>
+          <annotations v-model="beeHiveLogToUpdate.annotations"
+        /></b-card> -->
       </b-container>
-      {{ beeHiveLog }}
+
+      {{ beeHiveLogToUpdate }}
     </b-modal>
   </div>
 </template>
@@ -95,40 +104,36 @@ export default {
   data() {
     return {
       beeHiveLog: {
-        meteorology: {},
-        frames: {},
-        food: [
-          { name: 'Sirup', amountInGramm: 0 },
-          { name: 'Futterteig', amountInGramm: 0 }
-        ]
-      },
-      options: [
-        { text: 'Eier', value: 'eggs' },
-        { text: 'offen', value: 'openBreed' },
-        { text: 'verdeckelt', value: 'cappedBreed' }
-      ],
-      feeds: [
-        { name: 'Sirup', amountInGramm: 0 },
-        { name: 'Futterteig', amountInGramm: 0 }
-      ]
+        buildFrame: '',
+        meteorology: { weather: '' }
+      }
     }
   },
   computed: {
     ...mapState({
-      currentBeeHive: (state) => state.beeHives.currentBeeHive
+      currentBeeHiveLog: (state) => state.beeHives.currentBeeHiveLog
     }),
-    ...mapGetters('beeHives', ['getBeeHiveLogById'])
+    ...mapGetters('beeHives', ['getBeeHiveLogById']),
+    beeHiveLogToUpdate: {
+      get() {
+        let obj = JSON.parse(JSON.stringify(this.currentBeeHiveLog))
+        if (!obj.buildType) {
+          obj.buildType = ''
+        }
+        return obj
+      },
+      set(newBeeHiveLog) {
+        return newBeeHiveLog
+      }
+    }
   },
   methods: {
     ...mapActions('beeHives', ['updateBeeHiveLog']),
 
     async handleOk() {
-      await this.updateBeeHiveLog(this.beeHiveLog)
+      await this.updateBeeHiveLog(this.beeHiveLogToUpdate)
     },
-    resetModal() {
-      console.log(this.getBeeHiveLogById(this.id))
-      this.beeHiveLog = this.getBeeHiveLogById(this.id)
-    }
+    resetModal() {}
   }
 }
 </script>
