@@ -1,6 +1,5 @@
 <template>
   <div>
-    ModalID: {{ 'update-BeeHiveLog-modal-' + id }}
     <b-modal
       :id="'update-BeeHiveLog-modal-' + id"
       hide-backdrop
@@ -18,35 +17,33 @@
               class="detailBox"
               id="beeHiveLogdate"
               name="beeHiveLogdate"
-              valueType="format"/></b-col
+              valueType="format" /></b-col
         ></b-row>
-        <!-- <b-row
+        <b-row
           ><b-col>
-            <weather v-model="beeHiveLogToUpdate.meteorology.weather"/></b-col
-        ></b-row> -->
-        <!-- <b-row
+            <weather v-model="beeHiveLogToUpdate.meteorology.weather" /></b-col
+        ></b-row>
+
+        <b-row
           ><b-col>
             <temperature
-              v-model="beeHiveLogToUpdate.meteorology.temperature"/></b-col
-        ></b-row> -->
-        <!-- <b-card bg-variant="light"> -->
-        <label for="findings">Allgemeiner Befund:</label>
-        <b-form-checkbox-group
-          id="checkbox-group-1"
-          class="detailBox"
-          v-model="beeHiveLogToUpdate.findings"
-          :options="options"
-          name="findings"
-        />
-        <label>Gegeben und Genommen:</label>
-        <buildFrame v-model="beeHiveLogToUpdate.frames.buildFrame" />
-        <middleWall v-model="beeHiveLogToUpdate.frames.middleFrame" />
-        <broodComb v-model="beeHiveLogToUpdate.frames.broodComb" />
-        <foodComb v-model="beeHiveLogToUpdate.frames.foodComb" />
-        <emptyFrame
-          v-model="beeHiveLogToUpdate.frames.emptyFrame"
-        /><!-- </b-card
-        >
+              v-model="beeHiveLogToUpdate.meteorology.temperature" /></b-col
+        ></b-row>
+        <b-card bg-variant="light">
+          <label for="findings">Allgemeiner Befund:</label>
+          <b-form-checkbox-group
+            id="checkbox-group-1"
+            class="detailBox"
+            v-model="beeHiveLogToUpdate.findings"
+            :options="options"
+            name="findings" />
+          <label>Gegeben und Genommen:</label>
+          <buildFrame v-model="beeHiveLogToUpdate.frames.buildFrame" />
+          <middleWall v-model="beeHiveLogToUpdate.frames.middleFrame" />
+          <broodComb v-model="beeHiveLogToUpdate.frames.broodComb" />
+          <foodComb v-model="beeHiveLogToUpdate.frames.foodComb" />
+          <emptyFrame v-model="beeHiveLogToUpdate.frames.emptyFrame"
+        /></b-card>
         <b-card bg-variant="light">
           <label>Fütterung</label>
           <div v-for="feed in beeHiveLogToUpdate.food" :key="feed.name">
@@ -57,11 +54,11 @@
             />
           </div>
         </b-card>
-        <b-card> <meakness v-model="beeHiveLogToUpdate.meakness"/></b-card>
-        <b-card> <steadily v-model="beeHiveLogToUpdate.steadily"/></b-card>
+        <b-card> <meakness v-model="beeHiveLogToUpdate.meakness" /></b-card>
+        <b-card> <steadily v-model="beeHiveLogToUpdate.steadily" /></b-card>
         <b-card>
           <annotations v-model="beeHiveLogToUpdate.annotations"
-        /></b-card> -->
+        /></b-card>
       </b-container>
 
       {{ beeHiveLogToUpdate }}
@@ -106,7 +103,12 @@ export default {
       beeHiveLog: {
         buildFrame: '',
         meteorology: { weather: '' }
-      }
+      },
+      options: [
+        { text: 'Eier', value: 'eggs' },
+        { text: 'offen', value: 'openBreed' },
+        { text: 'verdeckelt', value: 'cappedBreed' }
+      ]
     }
   },
   computed: {
@@ -115,10 +117,22 @@ export default {
     }),
     ...mapGetters('beeHives', ['getBeeHiveLogById']),
     beeHiveLogToUpdate: {
+      // ToDO:
+      // Felder im Add anlegen(Workarround)
+      // Respnse aus REST verwenden
+
       get() {
         let obj = JSON.parse(JSON.stringify(this.currentBeeHiveLog))
-        if (!obj.buildType) {
-          obj.buildType = ''
+        console.log(obj)
+        if (!obj.frames) {
+          obj.frames = ''
+        }
+        if (!obj.meteorology) {
+          obj.meteorology = {}
+          obj.meteorology.temperature = 20
+        }
+        if (!obj.meteorology) {
+          obj.findings = []
         }
         return obj
       },
@@ -131,6 +145,7 @@ export default {
     ...mapActions('beeHives', ['updateBeeHiveLog']),
 
     async handleOk() {
+      console.log(this.beeHiveLogToUpdate)
       await this.updateBeeHiveLog(this.beeHiveLogToUpdate)
     },
     resetModal() {}

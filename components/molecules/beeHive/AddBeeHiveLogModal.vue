@@ -1,6 +1,5 @@
 <template>
   <div>
-    ModalID: {{ 'add-BeeHiveLog-modal-' + currentBeeHive._id }}
     <b-modal
       :id="'add-BeeHiveLog-modal-' + currentBeeHive._id"
       hide-backdrop

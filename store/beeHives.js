@@ -149,7 +149,7 @@ export const actions = {
 
   async updateBeeHiveLog({ commit }, payload) {
     await this.$axios
-      .put(`/api/beeHives/logs${payload._id}`, payload)
+      .put(`/api/beeHives/logs/${payload._id}`, payload)
       .then((res) => {
         if (res.status == 200) {
           commit('UPDATE_BEEHIVE_LOG', payload)

@@ -20,6 +20,7 @@ export default {
       default: null
     }
   },
+
   computed: {
     ...mapGetters('beeHives', ['getAllBeeHivesByLocId'])
   },
@@ -27,7 +28,7 @@ export default {
     ...mapActions('beeHives', ['setCurrentBeehive', 'loadBeeHives']),
     setBeeHive() {
       this.loadBeeHives()
-      const currBeeHive = this.setCurrentBeehive(this.id).then(function(
+      const currBeeHive = this.setCurrentBeehive(this.id).then(function (
         result
       ) {
         return result
@@ -37,3 +38,4 @@ export default {
   }
 }
 </script>
+ 
