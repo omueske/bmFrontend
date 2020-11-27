@@ -113,7 +113,8 @@ export const actions = {
       .post(`/api/beeHives/${payload.beeHiveId}/logs`, payload)
       .then((res) => {
         if (res.status == 201) {
-          commit('ADD_BEEHIVE_LOG', payload)
+          console.log(res)
+          commit('ADD_BEEHIVE_LOG', res.data)
         } else {
           console.log(res.status)
         }
@@ -152,7 +153,8 @@ export const actions = {
       .put(`/api/beeHives/logs/${payload._id}`, payload)
       .then((res) => {
         if (res.status == 200) {
-          commit('UPDATE_BEEHIVE_LOG', payload)
+          commit('UPDATE_BEEHIVE_LOG', res.data)
+          console.log(res)
         } else {
           console.log(res.status)
         }

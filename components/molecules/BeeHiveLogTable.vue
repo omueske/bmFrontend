@@ -15,7 +15,7 @@
         <b-button-group>
           <BeeHiveLogDeleteButton :id="data.item._id" />
           <BeeHiveLogUpdateButton :id="data.item._id" />
-          <UpdateBeeHiveLogModal :id="data.item._id" />
+          <UpdateBeeHiveLogModal :id="data.item._id" :bhive="data.item" />
         </b-button-group>
       </template>
     </b-table>

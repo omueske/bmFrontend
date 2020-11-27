@@ -17,17 +17,17 @@
               class="detailBox"
               id="beeHiveLogdate"
               name="beeHiveLogdate"
-              valueType="format" /></b-col
+              valueType="format"/></b-col
         ></b-row>
         <b-row
           ><b-col>
-            <weather v-model="beeHiveLogToUpdate.meteorology.weather" /></b-col
+            <weather v-model="beeHiveLogToUpdate.meteorology.weather"/></b-col
         ></b-row>
 
         <b-row
           ><b-col>
             <temperature
-              v-model="beeHiveLogToUpdate.meteorology.temperature" /></b-col
+              v-model="beeHiveLogToUpdate.meteorology.temperature"/></b-col
         ></b-row>
         <b-card bg-variant="light">
           <label for="findings">Allgemeiner Befund:</label>
@@ -36,12 +36,12 @@
             class="detailBox"
             v-model="beeHiveLogToUpdate.findings"
             :options="options"
-            name="findings" />
+            name="findings"/>
           <label>Gegeben und Genommen:</label>
-          <buildFrame v-model="beeHiveLogToUpdate.frames.buildFrame" />
-          <middleWall v-model="beeHiveLogToUpdate.frames.middleFrame" />
-          <broodComb v-model="beeHiveLogToUpdate.frames.broodComb" />
-          <foodComb v-model="beeHiveLogToUpdate.frames.foodComb" />
+          <buildFrame v-model="beeHiveLogToUpdate.frames.buildFrame"/>
+          <middleWall v-model="beeHiveLogToUpdate.frames.middleFrame"/>
+          <broodComb v-model="beeHiveLogToUpdate.frames.broodComb"/>
+          <foodComb v-model="beeHiveLogToUpdate.frames.foodComb"/>
           <emptyFrame v-model="beeHiveLogToUpdate.frames.emptyFrame"
         /></b-card>
         <b-card bg-variant="light">
@@ -54,13 +54,12 @@
             />
           </div>
         </b-card>
-        <b-card> <meakness v-model="beeHiveLogToUpdate.meakness" /></b-card>
-        <b-card> <steadily v-model="beeHiveLogToUpdate.steadily" /></b-card>
+        <b-card> <meakness v-model="beeHiveLogToUpdate.meakness"/></b-card>
+        <b-card> <steadily v-model="beeHiveLogToUpdate.steadily"/></b-card>
         <b-card>
           <annotations v-model="beeHiveLogToUpdate.annotations"
         /></b-card>
       </b-container>
-
       {{ beeHiveLogToUpdate }}
     </b-modal>
   </div>
@@ -97,58 +96,42 @@ export default {
     temperature,
     weather
   },
-  props: ['id'],
+  props: ['id', 'bhive'],
   data() {
     return {
-      beeHiveLog: {
-        buildFrame: '',
-        meteorology: { weather: '' }
-      },
       options: [
         { text: 'Eier', value: 'eggs' },
         { text: 'offen', value: 'openBreed' },
         { text: 'verdeckelt', value: 'cappedBreed' }
-      ]
+      ],
+      beeHiveLogToUpdate: {
+        meteorology: { weather: '' },
+        frames: {}
+      }
     }
   },
   computed: {
     ...mapState({
       currentBeeHiveLog: (state) => state.beeHives.currentBeeHiveLog
     }),
-    ...mapGetters('beeHives', ['getBeeHiveLogById']),
-    beeHiveLogToUpdate: {
-      // ToDO:
-      // Felder im Add anlegen(Workarround)
-      // Respnse aus REST verwenden
-
-      get() {
-        let obj = JSON.parse(JSON.stringify(this.currentBeeHiveLog))
-        console.log(obj)
-        if (!obj.frames) {
-          obj.frames = ''
-        }
-        if (!obj.meteorology) {
-          obj.meteorology = {}
-          obj.meteorology.temperature = 20
-        }
-        if (!obj.meteorology) {
-          obj.findings = []
-        }
-        return obj
-      },
-      set(newBeeHiveLog) {
-        return newBeeHiveLog
-      }
-    }
+    ...mapGetters('beeHives', ['getBeeHiveLogById'])
   },
   methods: {
     ...mapActions('beeHives', ['updateBeeHiveLog']),
 
     async handleOk() {
-      console.log(this.beeHiveLogToUpdate)
       await this.updateBeeHiveLog(this.beeHiveLogToUpdate)
     },
     resetModal() {}
+  },
+  mounted: async function() {
+    this.beeHiveLogToUpdate = await JSON.parse(JSON.stringify(this.bhive))
+    if (!this.beeHiveLogToUpdate.meteorology) {
+      this.beeHiveLogToUpdate.meteorology = {}
+    }
+    if (!this.beeHiveLogToUpdate.frames) {
+      this.beeHiveLogToUpdate.frames = { buildFrame: 0 }
+    }
   }
 }
 </script>
