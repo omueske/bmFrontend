@@ -117,10 +117,11 @@ export default {
     ...mapGetters('beeHives', ['getBeeHiveLogById'])
   },
   methods: {
-    ...mapActions('beeHives', ['updateBeeHiveLog']),
+    ...mapActions('beeHives', ['updateBeeHiveLog', 'loadBeeHiveLogs']),
 
     async handleOk() {
       await this.updateBeeHiveLog(this.beeHiveLogToUpdate)
+      await this.loadBeeHiveLogs(this.beeHiveLogToUpdate.beeHiveId)
     },
     resetModal() {}
   },
