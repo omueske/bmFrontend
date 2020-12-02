@@ -27,7 +27,7 @@
             </template>
           </b-form-select>
           <label for="hive">Volk</label>
-          <b-form-select v-model="queen['hive']" id="hive" class="mb-3">
+          <b-form-select v-model="queen['hiveId']" id="hive" class="mb-3">
             <b-form-select-option-group
               v-for="(locHive, key) in locHives"
               :label="key"
