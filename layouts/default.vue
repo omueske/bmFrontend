@@ -19,7 +19,8 @@ export default {
   methods: {
     ...mapActions('locations', ['loadLocations', 'setSelectedLocation']),
     ...mapActions('beeHives', ['loadBeeHives', 'setCurrentBeehive']),
-    ...mapActions('configurations', ['loadConfiguration'])
+    ...mapActions('configurations', ['loadConfiguration']),
+    ...mapActions('queens', ['loadQueens'])
   },
 
   mounted: function() {
@@ -28,6 +29,7 @@ export default {
     this.loadLocations()
     this.loadBeeHives()
     this.loadConfiguration()
+    this.loadQueens()
   }
 }
 </script>

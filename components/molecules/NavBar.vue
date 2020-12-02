@@ -16,7 +16,8 @@ export default {
     return {
       links: [
         { page: '/', name: 'Home' },
-        { page: '/location', name: 'Standort' }
+        { page: '/location', name: 'Standort' },
+        { page: '/queen', name: 'Königin' }
       ]
     }
   }
