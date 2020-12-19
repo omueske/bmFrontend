@@ -7,6 +7,9 @@
       :sort-desc.sync="sortDesc"
       responsive="sm"
     >
+      <template v-slot:cell(beeHive)="data">
+        {{ getBeeHiveIdByHiveId(data.item.beeHiveID).name }}
+      </template>
       <template v-slot:cell(actions)="data">
         <b-button-group>
           <QueenDeleteButton :id="data.item._id" />
@@ -35,7 +38,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import QueenDeleteButton from '~/components/atoms/queen/QueenDeleteButton.vue'
 
 export default {
@@ -51,6 +54,7 @@ export default {
         { key: 'hatchYear', label: 'Schlupfjahr', sortable: true },
         { key: 'pedigree', label: 'Abstammung', sortable: true },
         { key: 'status', label: 'Status', sortable: true },
+        { key: 'beeHive', label: 'Volk', sortable: true },
         { key: 'createdAt', label: 'Erstellt am', sortable: true },
         { key: 'updatedAt', label: 'letztes Update', sortable: false },
         { key: 'actions', label: 'Aktionen', sortable: false }
@@ -61,6 +65,7 @@ export default {
     ...mapState({
       queenList: (state) => state.queens.queenList
     }),
+    ...mapGetters('beeHives', ['getBeeHiveIdByHiveId']),
     inputVal: {
       get() {
         return this.value

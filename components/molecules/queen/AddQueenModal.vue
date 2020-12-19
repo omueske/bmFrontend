@@ -27,7 +27,7 @@
             </template>
           </b-form-select>
           <label for="hive">Volk</label>
-          <b-form-select v-model="queen['hiveId']" id="hive" class="mb-3">
+          <b-form-select v-model="queen['beeHiveID']" id="hive" class="mb-3">
             <b-form-select-option-group
               v-for="(locHive, key) in locHives"
               :label="key"
@@ -62,7 +62,7 @@ export default {
       queen: {},
       inputTypes: [
         { name: 'number', showName: 'Nummer' },
-        { name: 'pedigee', showName: 'Abstammung' },
+        { name: 'pedigree', showName: 'Abstammung' },
         { name: 'comment', showName: 'Bemerkung' }
       ]
     }
@@ -102,7 +102,7 @@ export default {
     async handleOk() {
       await this.addQueen(this.queen)
       this.resetModal()
-      this.setBeeHiveObject()
+      // this.setBeeHiveObject()
     },
     resetModal() {
       this.queen = {}

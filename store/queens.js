@@ -29,7 +29,8 @@ export const actions = {
   async addQueen({ commit }, payload) {
     await this.$axios.post('/api/queens', payload).then((res) => {
       if (res.status == 201) {
-        commit('ADD_QUEEN', payload)
+        console.log(res)
+        commit('ADD_QUEEN', res.data)
       } else {
         console.log(res.status)
       }
